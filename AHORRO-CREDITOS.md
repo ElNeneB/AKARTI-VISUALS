@@ -120,9 +120,9 @@ Cada reintento evitado ahorra 8 créditos de Higgsfield y un ciclo completo de C
 - Con 879 créditos y el reinicio alrededor del 29/10, alcanzan para unos **110 clips**, más o menos **9 recorridos** de unas 12 habitaciones. Lo que no se use antes de esa fecha se pierde.
 - Si en un mes normal solo produces 2 o 3 recorridos, conviene revisar si el plan Plus es el que te sirve.
 
-### G. Opcional: cambia el audio, decides tú
+### G. Audio OFF (aprobado por Enrique el 6/10)
 
-El director usa el audio de Kling solo como room tone, entre −18 y −24 dB debajo de la música, y silencia los ruidos de la IA. Generar con sonido OFF todos los clips menos 1 o 2 (para sacar el ambiente) **baja 25 % el costo** en Higgsfield. La skill `calidad` hoy exige sonido ON, así que solo se cambia si lo apruebas.
+El director usa el audio de Kling solo como room tone, entre −18 y −24 dB debajo de la música, y silencia los ruidos de la IA. Generar con sonido OFF todos los clips menos 1 o 2 (para sacar el ambiente) **baja 25 % el costo** en Higgsfield. **Aprobado:** desde el 6/10 todos los clips van con sonido OFF y el ambiente sale de una pista de librería en Premiere (ya actualizado en `calidad` y `director-akarti`).
 
 ---
 
@@ -144,6 +144,6 @@ El director usa el audio de Kling solo como room tone, entre −18 y −24 dB de
 | No preguntar por los jobs | De unas 12 llamadas a 1 por batch | — |
 | Sonnet para fases mecánicas | Mucho más barato por token | — |
 | Inicio seguro en cuartos riesgosos | Menos ciclos | Unos −20 % (lo que se fue en reintentos el 6/10) |
-| Sonido OFF (opcional) | — | −25 % |
+| Sonido OFF (aprobado) | — | −25 % |
 
 Los porcentajes de Higgsfield son exactos (salen del historial y de `get_cost`). Los de Claude son estimaciones según cómo se cobra cada llamada, porque no tengo el registro de la sesión anterior.
