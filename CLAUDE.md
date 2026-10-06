@@ -13,4 +13,6 @@ Recorridos en video con IA para propiedades de Airbnb (Kling 3.0 en Higgsfield +
 - Cada fase en su agente (`.claude/agents/`): auditor con Opus; generador, editor y juez rápido con Sonnet; juez de Opus solo para los clips en la frontera y la puerta C.
 - DOLLY y AXIS LOCK llevan fotograma final (`final-push`, en prueba). Upscale a 1080p solo de los clips aprobados.
 - Memoria en `aprendizajes.md`, música y room tone de `biblioteca/`, montaje con `akarti.py montaje` sobre la plantilla maestra, costo por video en `registro.csv`.
+- Tope por corrida en `presupuesto-corrida.json` (la guardia bloquea lo que lo pase). Corrida nocturna: `./akarti-noche.sh`, modo desatendido con `config-corrida.md`.
+- Marca: Cormorant Garamond + Jost; carbón, hueso y champán; nada de azul eléctrico (`assets/marca/`).
 - Si cambias una skill aquí, cámbiala también en claude.ai (o vuelve a subir su `.skill`).

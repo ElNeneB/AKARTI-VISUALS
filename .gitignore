@@ -1,0 +1,15 @@
+# Medios pesados: viven solo en el Mac
+teasers/**/*.mp4
+teasers/**/*.mov
+teasers/**/*.jpg
+teasers/**/*.png
+teasers/**/fotos/
+teasers/**/clips/
+rescate-6oct/
+prueba/
+biblioteca/musica/*.mp3
+biblioteca/musica/*.wav
+biblioteca/musica/*.m4a
+biblioteca/room-tone/*.wav
+*_tmp/
+.DS_Store

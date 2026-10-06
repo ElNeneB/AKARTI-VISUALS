@@ -28,6 +28,17 @@ Las reglas de esas skills no se relajan en modo automático. Lo único que cambi
 
 Si `estado-<propiedad>.md` ya existe, la corrida **sigue desde donde quedó**; no se repite nada de lo hecho.
 
+## Modo desatendido (corrida nocturna con `akarti-noche.sh`)
+
+Si el prompt dice **desatendido**, o lo lanza `akarti-noche.sh`:
+- **No preguntar nada.** Todas las respuestas del Paso 0 están en `config-corrida.md`: calidad std, tope en `presupuesto-corrida.json`, demo con marca de agua, render automático, música de la biblioteca, end card y salida.
+- **Fotos:** `python3 herramientas/akarti.py airbnb-fotos LINK teasers/<slug>/fotos`. Si Airbnb bloquea la descarga, usar Claude in Chrome si está disponible; si no, es una parada.
+- **Clips ya hechos:** antes de generar, `python3 herramientas/akarti.py identificar teasers/<slug>/fotos rescate-6oct/fotos`. Cada espacio que coincida con un clip aprobado de `rescate-6oct.md` se reutiliza: no se genera de nuevo y se anota la propiedad en esa tabla.
+- **Selección:** usar como guía la columna "Fotos a descargar" de `propiedades-teaser.csv` (ya auditada) y los descartes; el auditor solo elige los 3 mejores y confirma la puerta A.
+- **Presupuesto:** antes de cada envío, el costo tiene que entrar en lo que queda de `presupuesto-corrida.json`. La guardia bloquea cualquier envío que pase el tope. Si un reintento no entra, se arma el teaser con los clips aprobados que haya (mínimo 2) o se marca la propiedad como pendiente. Nunca queda nada a medias.
+- **Paradas:** escribirlas en el estado y **terminar** (la corrida sigue con la siguiente propiedad). Nunca esperar una respuesta.
+- **Edición:** render automático (`akarti-editor`, modo RENDER), sin Premiere.
+
 ## Paso 0: una sola pregunta al inicio
 
 Crear `estado-<propiedad>.md` desde `estado-PLANTILLA.md`. Hacer **una sola** pregunta con la herramienta de preguntas, solo de los datos que falten. Esta pregunta cumple la regla de `calidad` de preguntar la calidad antes de generar:

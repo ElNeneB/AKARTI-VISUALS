@@ -26,6 +26,16 @@ el chat = menos tokens en cada mensaje que sigue.
       recortados a beats enteros, música, room tone y end card.
   python3 akarti.py registrar PROPIEDAD MODO CLIPS REINTENTOS CREDITOS MINUTOS NOTA_C
       Agrega una fila a registro.csv (costo real por video).
+  python3 akarti.py render MONTAJE.json SALIDA.mp4
+      Render final sin Premiere: cortes en beat, estabilización (si ffmpeg tiene
+      vidstab), look sobrio, título, marca de agua, end card, música + room tone
+      y loudness a -14 LUFS / -1 dBTP. Lo usa el modo teaser.
+  python3 akarti.py room-tone (interior|ciudad|mar) SALIDA.wav [SEGUNDOS=90]
+      Room tone sintético y continuo para la capa de ambiente.
+  python3 akarti.py airbnb-fotos LINK CARPETA
+      Descarga las fotos del anuncio en el orden de la galería (Foto 01, 02...).
+  python3 akarti.py identificar CARPETA_A CARPETA_B
+      Encuentra fotos de A que ya están en B (por ejemplo, para reutilizar clips).
 """
 import csv
 import datetime
@@ -212,11 +222,10 @@ def duracion(ruta):
                       "-of", "csv=p=0", str(ruta)]).stdout)
 
 
-def montaje(json_entrada, salida):
-    from xml.sax.saxutils import escape
-    m = json.load(open(json_entrada, encoding="utf-8"))
-    fps = int(m.get("fps", 24))
-    beat = 60 / m["musica"]["bpm"]
+def calcular_tramos(m):
+    """Tramos del montaje: cada clip recortado a beats enteros (medio compás si se
+    puede, sin dos duraciones iguales seguidas cuando hay material) + end card."""
+    beat = 60 / m["musica"]["bpm"] if m.get("musica") else 0.5
     tramos, t = [], 0.0
     for c in m["clips"]:
         util = c["out"] - c["in"]
@@ -231,6 +240,15 @@ def montaje(json_entrada, salida):
         tramos.append({"archivo": m["end_card"]["archivo"], "in": 0.0, "beats": n,
                        "ini": t, "espacio": "End card", "imagen": True})
         t += n * beat
+
+    return beat, tramos, t
+
+
+def montaje(json_entrada, salida):
+    from xml.sax.saxutils import escape
+    m = json.load(open(json_entrada, encoding="utf-8"))
+    fps = int(m.get("fps", 24))
+    beat, tramos, t = calcular_tramos(m)
     total_f = round(t * fps)
 
     def fr(seg):
@@ -284,9 +302,193 @@ def montaje(json_entrada, salida):
            f"<track>{''.join(v)}</track></video><audio><track>{a1}</track>{a2}</audio></media>"
            "</sequence></xmeml>\n")
     open(salida, "w", encoding="utf-8").write(xml)
-    print(f"{salida}  ({len(tramos)} tramos, {t:.2f} s, {m['musica']['bpm']} BPM, beat {beat:.3f} s)")
+    print(f"{salida}  ({len(tramos)} tramos, {t:.2f} s, beat {beat:.3f} s)")
     for nombre, ini, n, frames in cortes:
         print(f"  {ini:6.2f} s  {nombre}: {n} beats ({frames} cuadros)")
+
+
+def tiene_filtro(nombre):
+    r = run(["ffmpeg", "-hide_banner", "-filters"]).stdout
+    return re.search(rf"\s{nombre}\s", r) is not None
+
+
+def lufs(ruta, inicio=0.0):
+    r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-ss", f"{inicio:.3f}", "-i", str(ruta),
+                        "-af", "ebur128", "-f", "null", "-"], capture_output=True, text=True)
+    v = re.search(r"I:\s+(-?[\d.]+) LUFS", r.stderr[r.stderr.rfind("Summary:"):])
+    return float(v.group(1)) if v else -70.0
+
+
+def render(json_entrada, salida):
+    """Render del montaje con ffmpeg (versión demo / teaser sin Premiere)."""
+    m = json.load(open(json_entrada, encoding="utf-8"))
+    fps, W, H = int(m.get("fps", 24)), int(m.get("ancho", 1920)), int(m.get("alto", 1080))
+    beat, tramos, total = calcular_tramos(m)
+    base = pathlib.Path(json_entrada).resolve().parent
+    tmp = base / (pathlib.Path(salida).stem + "_tmp")
+    tmp.mkdir(exist_ok=True)
+    vidstab = m.get("estabilizar", True) and tiene_filtro("vidstabdetect")
+    look = m.get("look", "eq=contrast=1.04:brightness=-0.005:saturation=0.95")
+    partes = []
+    for i, c in enumerate(tramos):
+        dur = c["beats"] * beat
+        parte = tmp / f"{i:02d}.mp4"
+        escala = (f"scale={W}:{H}:force_original_aspect_ratio=increase:flags=lanczos,"
+                  f"crop={W}:{H},setsar=1,fps={fps}")
+        if c.get("imagen"):
+            run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-t", f"{dur:.4f}", "-i", c["archivo"],
+                 "-vf", escala + ",format=yuv420p", "-c:v", "libx264", "-crf", "16",
+                 "-preset", "medium", "-an", str(parte)])
+        else:
+            filtros = escala
+            if vidstab:
+                trf = tmp / f"{i:02d}.trf"
+                run(["ffmpeg", "-v", "error", "-y", "-ss", f"{c['in']:.4f}", "-t", f"{dur:.4f}",
+                     "-i", c["archivo"], "-vf", f"vidstabdetect=shakiness=4:accuracy=15:result={trf}",
+                     "-f", "null", "-"])
+                filtros = (f"vidstabtransform=input={trf}:smoothing=20:zoom=0:optzoom=1:"
+                           f"interpol=bicubic,{escala}")
+            filtros += "," + look + ",format=yuv420p"
+            run(["ffmpeg", "-v", "error", "-y", "-ss", f"{c['in']:.4f}", "-t", f"{dur:.4f}",
+                 "-i", c["archivo"], "-vf", filtros, "-c:v", "libx264", "-crf", "16",
+                 "-preset", "medium", "-an", str(parte)])
+        partes.append(parte)
+    lista = tmp / "lista.txt"
+    lista.write_text("".join(f"file '{p}'\n" for p in partes))
+    video = tmp / "video.mp4"
+    run(["ffmpeg", "-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", str(lista),
+         "-c", "copy", str(video)])
+    # capas: título (entrada y salida de 8 cuadros) y marca de agua (fuera del end card)
+    fin_clips = tramos[-1]["ini"] if tramos[-1].get("imagen") else total
+    entradas, grafo, ult = ["-i", str(video)], [], "[0:v]"
+    n = 1
+    if m.get("titulo"):
+        entradas += ["-loop", "1", "-t", f"{total:.3f}", "-i", m["titulo"]]
+        f8 = 8 / fps
+        grafo.append(f"[{n}:v]format=rgba,fade=in:st=0.4:d={f8:.3f}:alpha=1,"
+                     f"fade=out:st=3.0:d={f8:.3f}:alpha=1[ti]")
+        grafo.append(f"{ult}[ti]overlay=0:0:enable='lt(t,{3.0 + f8:.3f})'[v{n}]")
+        ult, n = f"[v{n}]", n + 1
+    if m.get("marca_agua"):
+        entradas += ["-loop", "1", "-t", f"{total:.3f}", "-i", m["marca_agua"]]
+        grafo.append(f"{ult}[{n}:v]overlay=0:0:enable='lt(t,{fin_clips:.3f})'[v{n}]")
+        ult, n = f"[v{n}]", n + 1
+    # audio: música desde su primer beat + room tone continuo
+    audios = []
+    mus = m.get("musica") or {}
+    if mus.get("archivo"):
+        entradas += ["-ss", f"{mus.get('primer_beat_s', 0):.3f}", "-i", mus["archivo"]]
+        audios.append(f"[{n}:a]atrim=0:{total:.3f},asetpts=N/SR/TB,afade=t=in:d=0.05,"
+                      f"afade=t=out:st={max(total - 1.5, 0):.3f}:d=1.5,"
+                      f"volume={-14 - lufs(mus['archivo'], mus.get('primer_beat_s', 0)):.2f}dB[mu]")
+        n += 1
+    rt = m.get("room_tone") or {}
+    objetivo = -14 if mus.get("archivo") else -28
+    if rt.get("archivo"):
+        nivel_rt = (-14 + rt.get("db", -22)) if mus.get("archivo") else objetivo
+        entradas += ["-stream_loop", "-1", "-i", rt["archivo"]]
+        audios.append(f"[{n}:a]atrim=0:{total:.3f},asetpts=N/SR/TB,afade=t=in:d=0.3,"
+                      f"afade=t=out:st={max(total - 1.0, 0):.3f}:d=1.0,"
+                      f"volume={nivel_rt - lufs(rt['archivo']):.2f}dB[rt]")
+        n += 1
+    etiquetas = "".join(x for x in ("[mu]", "[rt]") if any(a.endswith(x) for a in audios))
+    if audios:
+        mezcla = (f"{etiquetas}amix=inputs={len(audios)}:normalize=0[mx]" if len(audios) > 1
+                  else f"{etiquetas}anull[mx]")
+        grafo += audios + [mezcla]
+    mapa = ["-map", ult if grafo and ult != "[0:v]" else "0:v"]
+    previo = tmp / "previo.mp4"
+    cmd = ["ffmpeg", "-v", "error", "-y", *entradas]
+    if grafo:
+        cmd += ["-filter_complex", ";".join(grafo)]
+    cmd += mapa + (["-map", "[mx]"] if audios else []) + [
+        "-c:v", "libx264", "-crf", "17", "-preset", "slow", "-pix_fmt", "yuv420p",
+        "-c:a", "pcm_s16le", "-ar", "48000", "-t", f"{total:.3f}", str(previo.with_suffix(".mov"))]
+    run(cmd)
+    previo = previo.with_suffix(".mov")
+    if audios:  # loudness en dos pasadas (medido, no estimado)
+        r = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(previo), "-af",
+                            f"loudnorm=I={objetivo}:TP=-1.5:LRA=11:print_format=json",
+                            "-f", "null", "-"], capture_output=True, text=True)
+        med = json.loads(r.stderr[r.stderr.rfind("{"):r.stderr.rfind("}") + 1])
+        an = (f"loudnorm=I={objetivo}:TP=-1.5:LRA=11:measured_I={med['input_i']}:"
+              f"measured_TP={med['input_tp']}:measured_LRA={med['input_lra']}:"
+              f"measured_thresh={med['input_thresh']}:offset={med['target_offset']}:linear=true")
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(previo), "-c:v", "copy", "-af", an,
+             "-ar", "48000", "-c:a", "aac", "-b:a", "320k", "-movflags", "+faststart", salida])
+    else:
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(previo), "-c:v", "copy", "-an",
+             "-movflags", "+faststart", salida])
+    import shutil
+    shutil.rmtree(tmp, ignore_errors=True)
+    print(f"{salida}  ({total:.2f} s, {len(tramos)} tramos, estabilizado: "
+          f"{'sí' if vidstab else 'no (ffmpeg sin vidstab)'}, música: {'sí' if mus.get('archivo') else 'NO'})")
+    if audios:
+        audio(salida)
+
+
+def room_tone(tipo, salida, segundos="90"):
+    d = float(segundos)
+    filtros = {
+        "interior": f"anoisesrc=d={d}:c=brown:a=0.5,lowpass=f=380,highpass=f=40,volume=-6dB",
+        "ciudad": f"anoisesrc=d={d}:c=brown:a=0.5,lowpass=f=260,highpass=f=35,"
+                  f"tremolo=f=0.07:d=0.25,volume=-4dB",
+        "mar": f"anoisesrc=d={d}:c=pink:a=0.5,bandpass=f=420:w=600,"
+               f"tremolo=f=0.11:d=0.7,lowpass=f=1800,volume=-3dB",
+    }
+    if tipo not in filtros:
+        sys.exit("Tipo: interior, ciudad o mar.")
+    run(["ffmpeg", "-v", "error", "-y", "-f", "lavfi", "-i", filtros[tipo], "-ac", "2",
+         "-ar", "48000", salida])
+    print(salida)
+
+
+def airbnb_fotos(link, carpeta):
+    import urllib.request
+    out = pathlib.Path(carpeta)
+    out.mkdir(parents=True, exist_ok=True)
+    ua = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/537.36 "
+          "(KHTML, like Gecko) Chrome/128.0 Safari/537.36")
+    req = urllib.request.Request(link, headers={"User-Agent": ua, "Accept-Language": "es-PE,es"})
+    html = urllib.request.urlopen(req, timeout=40).read().decode("utf-8", "ignore")
+    html = html.replace("\\u002F", "/").replace("\\/", "/")
+    urls, vistos = [], set()
+    for u in re.findall(r"https://a0\.muscache\.com/im/pictures/[^\"'?\s\\]+?\.(?:jpe?g|png|webp)", html):
+        clave = u.rsplit("/", 1)[-1]
+        if clave not in vistos and "/user/" not in u and "/Portrait" not in u:
+            vistos.add(clave)
+            urls.append(u)
+    if not urls:
+        sys.exit("No se encontraron fotos (Airbnb pudo bloquear la descarga): usar Claude in Chrome.")
+    for i, u in enumerate(urls, 1):
+        destino = out / f"foto_{i:02d}.jpg"
+        r = urllib.request.Request(u + "?im_w=1440", headers={"User-Agent": ua})
+        destino.write_bytes(urllib.request.urlopen(r, timeout=60).read())
+    print(f"{len(urls)} fotos en {out} (foto_01 = primera de la galería)")
+
+
+def huella(ruta):
+    w, h = tam(ruta)
+    if w / h > 16 / 9:
+        cw, ch = int(h * 16 / 9), h
+    else:
+        cw, ch = w, int(w * 9 / 16)
+    r = subprocess.run(["ffmpeg", "-v", "error", "-i", str(ruta), "-vf",
+                        f"crop={cw}:{ch},scale=9:8,format=gray", "-f", "rawvideo", "-"],
+                       check=True, capture_output=True).stdout
+    return sum(1 << i for i in range(64) if r[(i // 8) * 9 + i % 8] > r[(i // 8) * 9 + i % 8 + 1])
+
+
+def identificar(carpeta_a, carpeta_b):
+    def fotos(c):
+        return sorted(p for p in pathlib.Path(c).iterdir() if p.suffix.lower() in FOTOS)
+    hb = {p: huella(p) for p in fotos(carpeta_b)}
+    for pa in fotos(carpeta_a):
+        ha = huella(pa)
+        mejor = min(hb, key=lambda p: bin(hb[p] ^ ha).count("1"), default=None)
+        dist = bin(hb[mejor] ^ ha).count("1") if mejor else 64
+        print(f"{pa.name} -> {mejor.name if mejor and dist <= 10 else 'sin coincidencia'}"
+              f" (distancia {dist})")
 
 
 def registrar(propiedad, modo, clips, reintentos, creditos, minutos, nota_c):
@@ -306,7 +508,8 @@ if __name__ == "__main__":
     comandos = {"juez-clip": juez_clip, "hoja-fotos": hoja_fotos,
                 "recorte169": recorte169, "audio": audio, "filtro-fotos": filtro_fotos,
                 "final-push": final_push, "bpm": bpm, "montaje": montaje,
-                "registrar": registrar}
+                "registrar": registrar, "render": render, "room-tone": room_tone,
+                "airbnb-fotos": airbnb_fotos, "identificar": identificar}
     if len(sys.argv) < 2 or sys.argv[1] not in comandos:
         sys.exit(__doc__)
     comandos[sys.argv[1]](*sys.argv[2:])

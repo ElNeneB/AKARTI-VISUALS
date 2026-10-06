@@ -18,6 +18,14 @@ Hace una sola pregunta al inicio (calidad, presupuesto, datos de edición) y des
 
 Para seguir, se vuelve a escribir el mismo comando.
 
+## Corrida desatendida (Terminal del Mac)
+
+```
+cd ~/AKARTI-VISUALS && ./akarti-noche.sh
+```
+
+Pregunta 3 cosas al inicio (tope de créditos, permisos, Mac listo) y después corre sola: prueba del fotograma final, música en Gemini, rescate de los clips del 6/10 y un teaser por propiedad de `propiedades-teaser.csv` (de tu hoja de Drive "Pasaron el check"), hasta agotar el tope sin dejar nada a medias. Si se corta, vuelve a ejecutarla y retoma.
+
 ## Qué hay en cada carpeta
 
 | Ruta | Qué es |
@@ -37,6 +45,13 @@ Para seguir, se vuelve a escribir el mismo comando.
 | `plantilla-premiere.md` | Cómo armar una sola vez la plantilla maestra de Premiere |
 | `registro.csv` | Costo real por video (se crea en la primera corrida) |
 | `estado-prueba-final.md` | Prueba pendiente del fotograma final (12 créditos) |
+| `akarti-noche.sh` | La corrida desatendida |
+| `config-corrida.md` | Respuestas fijas de la corrida (calidad, tope, marca, render) |
+| `propiedades-teaser.csv` | Las 50 propiedades que pasaron la auditoría |
+| `rescate-6oct.md` | Los 15 clips del 6/10 para reutilizar |
+| `herramientas/marca.py` | End card, marca de agua y títulos con la identidad de Akarti |
+| `herramientas/corrida.py` | Cola de propiedades y presupuesto de la corrida |
+| `assets/` | Fuentes (licencia OFL) y piezas de marca |
 | `estado-PLANTILLA.md` | Plantilla del archivo de estado de cada propiedad |
 | `AHORRO-CREDITOS.md` | La investigación de consumo de créditos (6/10/2026) |
 

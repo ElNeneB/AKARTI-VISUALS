@@ -1,4 +1,4 @@
 archivo,ambiente,duracion_s,licencia
-interior.wav,interior silencioso,,
-ciudad.wav,ciudad lejana,,
-mar.wav,mar,,
+interior.wav,interior silencioso,90,propia (sintética)
+ciudad.wav,ciudad lejana,90,propia (sintética)
+mar.wav,mar,90,propia (sintética)

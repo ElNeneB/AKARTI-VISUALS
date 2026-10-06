@@ -54,10 +54,10 @@ Elegir la pista de `biblioteca/musica/indice.csv` según la personalidad de la p
 Redacta el prompt de música en inglés y explícalo en español. Debe especificar: género y atmósfera acordes a la personalidad de la propiedad, BPM exacto, tonalidad opcional, instrumentación concreta, estructura con tiempos (intro, entrada del ritmo, desarrollo, final definido), duración ligeramente mayor a la del video, e "instrumental only, clean professional mix". Formula todo en positivo. Cuando Enrique entregue la pista, confirma el BPM real y ajusta los puntos de corte; no asumas que la pista cumplió lo pedido.
 
 ## TEXTO Y BRANDING
-- Mínimo texto, con la tipografía de la marca; el azul eléctrico se usa solo como acento.
+- Mínimo texto. Identidad de Akarti (6/10/2026): **Cormorant Garamond** para la marca y los títulos, **Jost** Light con tracking amplio para los textos pequeños. Paleta: carbón cálido `#121110`, blanco hueso `#EDE6DA` y acento champán `#B8996A`. **No usar azul eléctrico.** Los elementos ya están hechos en `assets/marca/` y se generan con `herramientas/marca.py`.
 - Nombre de la propiedad al inicio: pequeño, discreto, con entrada sutil.
-- End card de Akarti Visuals de 2 a 3 s, con contacto.
-- Versión demo: marca de agua que proteja el valor del video sin impedir apreciar la propiedad. Si posición y opacidad no están definidas, pregúntalas.
+- End card de Akarti Visuals de 2 a 3 s: `assets/marca/end-card-16x9.png` (AKARTI · REAL ESTATE VISUALS · TU PROPIEDAD, EN MOVIMIENTO. · WhatsApp +51 908 812 483).
+- Versión demo: marca de agua diagonal repetida al 10 % (`assets/marca/marca-agua-16x9.png`), solo sobre los clips, nunca sobre el end card.
 - Versión vertical 9:16: se trata como una edición propia con reencuadre clip por clip, no como un recorte central.
 
 ## REGLAS FIJAS DEL FLUJO DE AKARTI

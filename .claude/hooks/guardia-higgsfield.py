@@ -6,6 +6,8 @@ Bloquea, antes de que se gaste un crédito:
   - Generar sin estado-<propiedad>.md con la Puerta A aprobada (nota 9 o 10) y la calidad elegida.
   - show_generations (repite el prompt de cada clip y gasta tokens de más).
   - upscale_video a más de 30 fps (duplica el costo).
+  - Cualquier envío que haga pasar el tope de presupuesto-corrida.json (si existe):
+    cada envío suma su costo estimado aunque luego falle (cuenta de más, nunca de menos).
 Las consultas de costo (get_cost: true) siempre pasan.
 Saltar la regla del estado, solo si Enrique lo pide: AKARTI_SIN_ESTADO=1
 """
@@ -51,6 +53,33 @@ def revisar_clip(p, etiqueta):
               ". Corrige los parámetros y vuelve a enviar.")
 
 
+COSTO_SEGUNDO = {"std": 1.5, "pro": 1.75, "4k": 3.0}  # Kling 3.0 sonido OFF (get_cost, 6/10)
+
+
+def costo_clip(p):
+    p = params_de(p)
+    if not str(p.get("model", "")).startswith("kling"):
+        return 2.0  # otro modelo de video: estimación conservadora
+    return COSTO_SEGUNDO.get(str(p.get("mode", "std")), 3.0) * int(p.get("duration", 5))
+
+
+def cobrar(cwd, costo, detalle):
+    """Suma el costo a presupuesto-corrida.json o niega si se pasa del tope."""
+    ruta = os.path.join(os.environ.get("CLAUDE_PROJECT_DIR", cwd), "presupuesto-corrida.json")
+    if not os.path.exists(ruta):
+        return
+    with open(ruta, encoding="utf-8") as f:
+        p = json.load(f)
+    if p["comprometido"] + costo > p["tope"]:
+        negar(f"Tope de la corrida: van {p['comprometido']:.2f} de {p['tope']} créditos y este "
+              f"envío ({detalle}) cuesta {costo:.2f}. No se envía. Termina lo que esté a medias "
+              "sin generar más y reporta.")
+    p["comprometido"] = round(p["comprometido"] + costo, 2)
+    p.setdefault("historial", []).append({"detalle": detalle, "creditos": costo})
+    with open(ruta, "w", encoding="utf-8") as f:
+        json.dump(p, f, ensure_ascii=False, indent=1)
+
+
 def revisar_estado(cwd):
     if os.environ.get("AKARTI_SIN_ESTADO") == "1":
         return
@@ -77,12 +106,15 @@ def main():
         p = params_de(entrada.get("params"))
         if float(p.get("fps", 24)) > 30:
             negar("upscale_video a más de 30 fps duplica el costo. Usa fps: 24 (skill calidad).")
+        cobrar(d.get("cwd", os.getcwd()), 0.1, "upscale 1 clip")
     if herramienta == "generate_video":
         p = params_de(entrada.get("params"))
         if not p.get("get_cost"):
             revisar_clip(p, "generate_video")
             if str(p.get("model", "")).startswith("kling"):
                 revisar_estado(d.get("cwd", os.getcwd()))
+            cobrar(d.get("cwd", os.getcwd()), costo_clip(p) * int(p.get("count", 1)),
+                   "generate_video")
     elif herramienta == "generate_video_batch":
         reqs = entrada.get("requests", [])
         for r in reqs:
@@ -90,6 +122,8 @@ def main():
         if any(str(params_de(r.get("params")).get("model", "")).startswith("kling")
                for r in reqs):
             revisar_estado(d.get("cwd", os.getcwd()))
+        cobrar(d.get("cwd", os.getcwd()), sum(costo_clip(r.get("params")) for r in reqs),
+               f"batch de {len(reqs)} clips")
 
 
 if __name__ == "__main__":
