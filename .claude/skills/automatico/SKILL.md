@@ -20,8 +20,11 @@ Las reglas de esas skills no se relajan en modo automático. Lo único que cambi
 ## Uso
 
 ```
-/automatico <propiedad> <carpeta de fotos | link de Airbnb>
+/automatico <propiedad> <carpeta de fotos | link de Airbnb> [teaser]
 ```
+
+- **Completo** (por defecto): un clip por habitación y el recorrido entero.
+- **teaser**: para un prospecto que todavía no paga. Solo los 3 espacios más fuertes (el plano de apertura y dos más, con movimientos distintos) y un video de unos 15 s con marca de agua. Unos 18 créditos en std. Si el cliente compra, `/automatico <propiedad> <carpeta>` hace el recorrido completo y reutiliza los 3 clips aprobados.
 
 Si `estado-<propiedad>.md` ya existe, la corrida **sigue desde donde quedó**; no se repite nada de lo hecho.
 
@@ -34,7 +37,7 @@ Crear `estado-<propiedad>.md` desde `estado-PLANTILLA.md`. Hacer **una sola** pr
 3. Versión: demo con marca de agua (por defecto) o final. Si es demo: posición y opacidad de la marca de agua.
 4. Formatos: 16:9 (por defecto) y/o 9:16.
 5. Personalidad de la propiedad y duración objetivo.
-6. Música: ruta del archivo, o "pausar para generarla con Gemini".
+6. Música: se elige sola de `biblioteca/musica/indice.csv` según la personalidad. Preguntar solo si la biblioteca no tiene pista para esa personalidad (ruta del archivo, o "pausar para generarla con Gemini").
 7. Carpeta de exportación (por defecto `Claude-Edicion` en el escritorio).
 
 Escribir las respuestas en el estado: `calidad_kling:`, `presupuesto_creditos:` y una sección "Datos de edición". Anotar el saldo inicial de Higgsfield (`balance`). Desde aquí la corrida no vuelve a preguntar, salvo en las paradas de abajo.
@@ -48,10 +51,11 @@ Si existen los agentes `akarti-auditor`, `akarti-generador`, `akarti-juez` y `ak
    - Si se pasó un **link**: entregar el veredicto y la lista de fotos para descargar, y parar (es el único paso que necesita a Enrique). Al volver con la carpeta, `/automatico <propiedad> <carpeta>` sigue desde aquí.
 2. **Costo:** sacar el costo exacto con `get_cost` (sonido OFF). Si el total entra en `presupuesto_creditos`, seguir sin preguntar, porque el presupuesto ya está aprobado. Si no entra, parar y mostrar la diferencia.
 3. **Generación** (`akarti-generador`, modo ENVIAR_Y_ESPERAR): recorte 16:9, subida y **un solo** batch. Después, esperar sin gastar: una sola llamada `sleep 240` en Bash y luego una sola llamada a `jobs_wait`. Si quedan jobs en proceso, `sleep 60` y otra llamada a `jobs_wait`, como máximo 6 veces. Si `sleep` no está permitido, repetir `jobs_wait` dentro del agente (su contexto es chico). Después descarga los clips y arma la hoja 2x2 de cada uno.
-4. **Puerta B** (`akarti-juez`): nota por clip en el estado.
+4. **Puerta B en dos niveles:** primero `akarti-juez-rapido` (Sonnet) juzga todos los clips; después `akarti-juez` (Opus) vuelve a juzgar solo los que quedaron con nota 8 o 9 o con algún criterio sin verificar. Las notas van al estado y una línea por clip a `aprendizajes.md`.
 5. **Reintentos:** todos los clips reprobados van juntos en **un solo** batch, con el cambio que indicó el juez y siempre dentro del presupuesto. Se repiten los pasos 3 y 4. Máximo 2 reintentos por clip. Un clip que no aprueba tras 2 reintentos se **marca como descartado** y la corrida **sigue** con los demás (regla de modo automático de `juez-akarti`). Si al descartarlo el recorrido se queda sin un espacio clave (sala, dormitorio principal o plano de apertura), anotarlo para el reporte final.
-6. **Música:** si hay ruta, seguir. Si es "pausar", escribir el prompt de Gemini siguiendo `director-akarti`, guardarlo en el estado y parar. Al volver con la pista, `/automatico <propiedad>` sigue.
-7. **Edición** (`akarti-editor`): Premiere según `director-akarti`, sin escribir un "prompt para Claude Code" aparte. El room tone sale de una pista de librería porque los clips vienen sin audio.
+5b. **Upscale** (`akarti-generador`, modo MEJORAR): todos los clips aprobados en un solo envío, 1080p (2k si hay 9:16), y una sola espera.
+6. **Música:** pista de la biblioteca o la ruta que dio Enrique; con eso se sigue sin parar. Si es "pausar", escribir el prompt de Gemini siguiendo `director-akarti`, guardarlo en el estado y parar. Al volver con la pista, `/automatico <propiedad>` sigue.
+7. **Edición** (`akarti-editor`): plantilla maestra, `montaje-<propiedad>.json` y su XML con cortes en beat, y por MCP solo estabilización, color y exportación, según `director-akarti`. No escribe un "prompt para Claude Code" aparte. El room tone sale de una pista de librería porque los clips vienen sin audio.
 8. **Puerta C** (`akarti-juez`): si falla, corregir la edición sin regenerar (máximo 2 veces). Si el fallo es un clip deformado, ese clip vuelve al paso 5.
 
 ## Paradas permitidas (las únicas)
@@ -59,7 +63,7 @@ Si existen los agentes `akarti-auditor`, `akarti-generador`, `akarti-juez` y `ak
 - El set no sirve.
 - Se pasó un link y hay que descargar las fotos.
 - El costo supera el presupuesto aprobado.
-- Falta la música.
+- Falta la música: solo si la biblioteca no tiene pista para esa personalidad.
 - Una función de Premiere no está disponible por MCP: proponer la alternativa manual, sin improvisar.
 - Un error de una herramienta que no se resuelve en un reintento.
 
@@ -81,4 +85,4 @@ En 10 líneas o menos:
 - los créditos gastados (saldo inicial menos saldo final) contra el presupuesto;
 - lo que quedó pendiente.
 
-Marcar la fase 3 en el estado.
+Marcar la fase 3 en el estado y registrar la corrida con `python3 herramientas/akarti.py registrar ...`. Si quedan créditos y faltan menos de 7 días para el 29, recordarlo en el reporte.

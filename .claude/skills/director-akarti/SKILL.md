@@ -47,7 +47,10 @@ La imagen debe verse como si la cámara estuviera montada sobre un riel o una gr
 - Fundidos de audio de 6 a 12 frames en cada empalme para eliminar pops, aunque el corte de imagen sea duro.
 - Master final: aproximadamente -14 LUFS integrados, true peak máximo de -1 dBTP, medido sobre el archivo exportado con `python3 scripts/akarti.py audio VIDEO.mp4` (skill `juez-akarti`).
 
-## MÚSICA (GENERADA CON GEMINI)
+## MÚSICA: PRIMERO LA BIBLIOTECA
+Elegir la pista de `biblioteca/musica/indice.csv` según la personalidad de la propiedad. Su BPM y su primer beat ya están medidos. Solo si no hay pista para esa personalidad, se crea con Gemini como se indica abajo, y la pista nueva se agrega al índice después de medirla con `python3 herramientas/akarti.py bpm`. El room tone sale de `biblioteca/room-tone/indice.csv`.
+
+## MÚSICA (GENERADA CON GEMINI, SOLO SI FALTA EN LA BIBLIOTECA)
 Redacta el prompt de música en inglés y explícalo en español. Debe especificar: género y atmósfera acordes a la personalidad de la propiedad, BPM exacto, tonalidad opcional, instrumentación concreta, estructura con tiempos (intro, entrada del ritmo, desarrollo, final definido), duración ligeramente mayor a la del video, e "instrumental only, clean professional mix". Formula todo en positivo. Cuando Enrique entregue la pista, confirma el BPM real y ajusta los puntos de corte; no asumas que la pista cumplió lo pedido.
 
 ## TEXTO Y BRANDING
@@ -91,6 +94,11 @@ Si falta algún dato, pídelo en una sola pregunta breve; nunca lo supongas:
 
 ## CONTROL DE CALIDAD FINAL
 Antes de dar un video por terminado, debe cumplir todo esto: imagen estable sin deformaciones en ningún clip; líneas arquitectónicas rectas; color consistente entre clips; cortes sobre el beat; sin arranques ni frenadas visibles; audio sin pops ni ruidos de IA; loudness dentro del rango; branding correcto; marca de agua presente si es demo.
+
+## MONTAJE AUTOMÁTICO
+- Partir de la plantilla maestra `Akarti-Plantilla.prproj` (ver `plantilla-premiere.md`): look, branding, marca de agua, pistas de audio y preset de exportación ya están armados.
+- Armar `montaje-<propiedad>.json` con los clips aprobados (los que tienen upscale), sus In/Out, la pista de música (bpm y primer_beat_s), el room tone con su nivel en dB y el end card. Generar la línea de tiempo con `python3 herramientas/akarti.py montaje montaje-<propiedad>.json montaje-<propiedad>.xml`. Cada clip queda recortado a un número entero de beats, preferentemente en medio compás y sin dos duraciones iguales seguidas cuando hay material.
+- Importar el XML en Premiere en un solo paso y moverlo a V1 de la plantilla. Por MCP solo se hacen Warp Stabilizer, la revisión de color por clip y la exportación.
 
 ## AHORRO DE USO
 - La edición en Premiere es la fase 3: va en un chat nuevo que lee `estado-<propiedad>.md` (lista de clips, In/Out, notas del juez), con Sonnet.

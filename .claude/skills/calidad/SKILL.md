@@ -20,6 +20,11 @@ Antes de crear o generar nada, preguntar a Enrique con qué calidad se harán lo
 - Sonido: OFF. Enviar siempre `sound: "off"`. El audio del video sale de la música y de un room tone de librería en Premiere, no de Kling. Sin sonido el clip std de 4 s cuesta 6 créditos en vez de 8 (25 % menos).
 - Las fotos verticales se recortan a 16:9 ANTES de subirlas a Higgsfield, en la computadora de Enrique, con `python3 scripts/akarti.py recorte169 ENTRADA SALIDA` (está en la skill `no-gastar`). Claude no necesita mirar las fotos recortadas.
 
+## Fotograma final y upscale
+
+- Los clips con "Final: Sí" en la Lista definitiva llevan dos medias: la foto 16:9 como `start_image` y su `final-push` como `end_image`. El precio no cambia (6 créditos en std con sonido OFF).
+- **Upscale solo de clips aprobados** en la puerta B, nunca de los reprobados. Usar `upscale_video` con `provider: bytedance`, `preset: aigc`, `fps: 24` (más de 30 duplica el costo), `width: 1280`, `height: 720` (salida de std), y `resolution: 1080p` para 16:9 o `2k` si también se entrega en 9:16. No permite consultar el costo antes; sumar un margen al presupuesto (prueba del 6/10: 0,08 créditos por clip de 4 s a 1080p y 24 fps). Se envían todos juntos y se espera una sola vez, igual que los clips.
+
 ## Antes de ejecutar
 
 Confirmar con Enrique la calidad elegida, el número de clips y el costo en créditos. Sacar el costo real con `generate_video` y `get_cost: true` (no genera ni cobra), con los mismos parámetros que se van a usar, sonido OFF incluido. No reutilizar cifras de configuraciones anteriores. La cuenta de Enrique no tiene "unlimited mode" disponible para Kling 3.0, así que cada clip gasta créditos.

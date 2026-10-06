@@ -5,6 +5,7 @@ Bloquea, antes de que se gaste un crédito:
   - Kling con sonido distinto de "off", duración distinta de 4 s o formato distinto de 16:9.
   - Generar sin estado-<propiedad>.md con la Puerta A aprobada (nota 9 o 10) y la calidad elegida.
   - show_generations (repite el prompt de cada clip y gasta tokens de más).
+  - upscale_video a más de 30 fps (duplica el costo).
 Las consultas de costo (get_cost: true) siempre pasan.
 Saltar la regla del estado, solo si Enrique lo pide: AKARTI_SIN_ESTADO=1
 """
@@ -72,6 +73,10 @@ def main():
     if herramienta == "show_generations":
         negar("show_generations repite el prompt completo de cada clip y gasta uso de "
               "Claude. Usa los job_id de estado-<propiedad>.md con jobs_wait.")
+    if herramienta == "upscale_video":
+        p = params_de(entrada.get("params"))
+        if float(p.get("fps", 24)) > 30:
+            negar("upscale_video a más de 30 fps duplica el costo. Usa fps: 24 (skill calidad).")
     if herramienta == "generate_video":
         p = params_de(entrada.get("params"))
         if not p.get("get_cost"):

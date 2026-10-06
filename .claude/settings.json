@@ -2,7 +2,7 @@
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "mcp__.*Highsfield__(generate_video|generate_video_batch|show_generations)",
+        "matcher": "mcp__.*Highsfield__(generate_video|generate_video_batch|show_generations|upscale_video)",
         "hooks": [
           {
             "type": "command",

@@ -23,17 +23,26 @@ Descartar por criterio propio, sin pedir permiso, e informar después qué se qu
 
 1. **Primero, el veredicto:** decir si el set sirve o no para un recorrido.
 2. **Si sirve:** listar las fotos descartadas, cada una con su motivo.
-3. **Después, la tabla "Lista definitiva"** con estas columnas: #, Foto (ID), Espacio, Prompt (DOLLY / ORBIT / AXIS LOCK / CRANE), Recorte 16:9 (Sí / —).
+3. **Después, la tabla "Lista definitiva"** con estas columnas: #, Foto (ID), Espacio, Prompt (DOLLY / ORBIT / AXIS LOCK / CRANE), Recorte 16:9 (Sí / —), Final (Sí / —).
 
 Un clip = una habitación. Nunca planear una transición continua entre cuartos (la IA derrite las paredes).
 
 ## Inicio seguro (para no gastar en reintentos)
+
+Antes de elegir los movimientos, leer `aprendizajes.md` y aplicar sus reglas confirmadas y lo que ya pasó o falló en espacios parecidos.
 
 Elegir desde el primer intento la versión que se sabe que aguanta, en vez de esperar al reintento:
 
 - **ORBIT a 20°** si el cuarto tiene camarotes, patrones repetidos, persianas, estanterías, cabeceras con listones o cerámicos con dibujo. El arco de 30° o 45° queda solo para espacios amplios y con pocos patrones. (El 6/10, un ORBIT a 30° deformó y hubo que repetirlo a 20°; los clips que empezaron directo en 20° pasaron sin reintentos.)
 - **AXIS LOCK con descripción del cuarto** en cuartos chicos o con muebles altos (camarotes, roperos grandes): poner al inicio del prompt una frase breve con los materiales, los muebles principales y las ventanas o puertas reales del cuarto, en positivo, antes del texto fijo de AXIS LOCK. (El 6/10, el dormitorio del camarote necesitó 3 intentos.)
 - En la tabla, marcar estos clips en la columna de prompt como "ORBIT 20°" o "AXIS LOCK + descripción", con la frase de descripción escrita.
+
+## Fotograma final (DOLLY y AXIS LOCK)
+
+Kling 3.0 acepta una imagen de inicio y una final por el mismo precio. En DOLLY y AXIS LOCK se pasa como final un recorte centrado de la **misma** foto, un 12 % más cerrado (`python3 herramientas/akarti.py final-push FOTO_169.jpg FINAL.jpg 12`). Así Kling solo interpola un avance entre dos imágenes reales y la geometría queda anclada. Marcar "Sí" en la columna Final.
+
+- En ORBIT y CRANE va sin final, porque la vista cambia de lado o de altura y un recorte no la representa.
+- **En prueba desde el 6/10:** el juez anota en `aprendizajes.md` cada clip con final. Si un DOLLY o AXIS LOCK con final deforma o queda sin movimiento, el reintento se hace sin final (o con 8 %), y se anota.
 
 ## Prompts de cámara
 

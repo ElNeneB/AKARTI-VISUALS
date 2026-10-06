@@ -23,11 +23,17 @@ Al terminar cada fase: actualizar `estado-<propiedad>.md` y decirle a Enrique "F
 
 ## Orden fijo (no saltarse pasos)
 
-1. **Auditar las fotos sin gastar créditos.** No generar nada, no subir nada a Higgsfield todavía. Para revisar el set, armar hojas de 6 fotos numeradas con `python3 scripts/akarti.py hoja-fotos CARPETA` y mirar las hojas, no foto por foto. Solo se abre una foto en grande si hay duda (distorsión, espejo, persona pequeña).
+1. **Auditar las fotos sin gastar créditos.** No generar nada, no subir nada a Higgsfield todavía. Primero `python3 scripts/akarti.py filtro-fotos CARPETA`: marca duplicados, borrosas, baja resolución, verticales y luz distinta, sin que Claude mire nada. Para revisar el set, armar hojas de 6 fotos numeradas con `python3 scripts/akarti.py hoja-fotos CARPETA` y mirar las hojas, no foto por foto. Solo se abre una foto en grande si hay duda (distorsión, espejo, persona pequeña).
 2. **Descartar.** Aplicar los criterios de la skill `cocinando-lo-demas`. Se pueden descartar fotos por criterio propio sin pedir permiso, pero siempre informando qué se quitó y por qué.
 3. **Armar la ruta de clips.** Un clip por habitación, en el orden del recorrido, aplicando las reglas de inicio seguro de `cocinando-lo-demas` para no gastar en reintentos. Entregar la tabla "Lista definitiva" con el formato de `cocinando-lo-demas` y guardarla en `estado-<propiedad>.md`.
 4. **Generar.** Recién aquí se gastan créditos. Recortar las fotos verticales con `python3 scripts/akarti.py recorte169 ENTRADA SALIDA`. Antes de generar, aplicar la skill `calidad`: preguntar la calidad, sonido OFF, un solo batch y una sola espera.
 5. **Cortar en Premiere.** Hard cuts, sin disolvencias, recortando el arranque y la frenada de cada clip (las rampas de aceleración no se quitan por prompt). Higgsfield no estabiliza: si hace falta, Warp Stabilizer en Premiere (Subspace Warp, Smoothness 15-25%).
+
+## Memoria y costos
+
+- Antes del paso 3, leer `aprendizajes.md`. Después de la puerta B, el juez le agrega una línea por clip.
+- Al terminar cada video: `python3 scripts/akarti.py registrar PROPIEDAD MODO CLIPS REINTENTOS CREDITOS MINUTOS NOTA_C`. El archivo `registro.csv` da el costo real por video para fijar precios.
+- Los créditos de Higgsfield vencen el día 29 de cada mes: planificar la producción para usarlos antes de esa fecha.
 
 ## Nota
 

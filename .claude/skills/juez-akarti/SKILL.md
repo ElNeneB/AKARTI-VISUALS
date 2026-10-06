@@ -33,6 +33,10 @@ Revisar los fotogramas de 0,5 s, 2 s y 3,5 s junto a la foto original en **una s
 
 Los clips vienen sin sonido (sonido OFF, ver `calidad`). El audio se revisa recién en la puerta C.
 
+**Juez en dos niveles (puerta B):** la primera revisión de cada clip la hace Sonnet (agente `akarti-juez-rapido`). Opus (agente `akarti-juez`) solo vuelve a juzgar los clips en la frontera: nota 8 o 9, o con algún criterio que quedó sin verificar. Una nota de 10, o una de 7 o menos, la decide Sonnet. Los criterios y la regla de evidencia son los mismos en los dos niveles.
+
+**Memoria:** después de la puerta B, agregar una línea por clip en `aprendizajes.md` con: fecha, propiedad, espacio y rasgos (tamaño, muebles altos, patrones), movimiento, si llevó final, nota y resultado.
+
 1. **(crítico)** Paredes, marcos y líneas rectas no ondulan ni se doblan.
 2. **(crítico)** Muebles y objetos no se derriten, no cambian de forma ni de lugar.
 3. **(crítico)** No aparecen personas, animales ni objetos nuevos.
