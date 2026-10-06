@@ -1,5 +1,8 @@
 # Akarti Visuals: reglas de trabajo
 
+## Cómo se usa (automático)
+Escribe `/recorrido <propiedad> [carpeta de fotos o link de Airbnb]` y repite el mismo comando en cada paso. Lee `estado-<propiedad>.md`, decide la fase y delega en un agente con su modelo fijo (`.claude/agents/`: auditor y juez con Opus; generador y editor con Sonnet). Solo te pregunta lo que decides tú: la calidad de Kling, el "sí" al costo y los datos de la edición. Un hook (`.claude/hooks/guardia-higgsfield.py`) bloquea los clips con sonido ON, de duración o formato distintos, la generación sin Puerta A aprobada y `show_generations`.
+
 Recorridos en video con IA para propiedades de Airbnb. Las reglas completas están en `skills/` (copias de las skills de claude.ai: `no-gastar`, `cocinando-lo-demas`, `calidad`, `juez-akarti`, `director-akarti`). Si cambias una, cambia también la de claude.ai.
 
 ## Reglas de ahorro (siempre)

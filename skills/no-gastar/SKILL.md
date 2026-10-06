@@ -54,6 +54,9 @@ Si Enrique pasa el link de un anuncio de Airbnb en vez de las fotos, hacer el pa
 
 ```
 # Estado — [Propiedad]
+puerta_A_nota: 
+calidad_kling: 
+
 ## Fase actual
 - [ ] 1 Auditoría + Lista definitiva (puerta A)
 - [ ] 2 Recorte, subida, generación, puerta B
@@ -61,7 +64,7 @@ Si Enrique pasa el link de un anuncio de Airbnb en vez de las fotos, hacer el pa
 ## Lista definitiva (puerta A: nota __/10)
 | # | Foto (ID) | Espacio | Prompt | Recorte 16:9 | media_id | job_id | Puerta B | In / Out |
 Plano de apertura: __
-Calidad Kling: std / pro / 4k — Sonido: OFF — Créditos aprobados: __
+Sonido: OFF — Créditos aprobados: __
 ## Descartes
 - Foto __: motivo
 ## Pendientes / reintentos (van todos en un solo batch)

@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__.*Highsfield__(generate_video|generate_video_batch|show_generations)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/guardia-higgsfield.py"
+          }
+        ]
+      }
+    ]
+  }
+}
