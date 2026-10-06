@@ -9,7 +9,7 @@ Usar antes de generar o crear cualquier clip con Kling 3.0 en Higgsfield para Ak
 
 ## Paso obligatorio: preguntar la calidad
 
-Antes de crear o generar nada, preguntar a Enrique con qué calidad se harán los videos con Kling (std, pro o 4k; son los modos que acepta Kling 3.0 vía Higgsfield). Usar la herramienta de preguntas con opciones. No asumir la calidad aunque "std" sea la habitual, y no generar hasta tener la respuesta.
+Antes de crear o generar nada, preguntar a Enrique con qué calidad se harán los videos con Kling (std, pro o 4k; son los modos que acepta Kling 3.0 vía Higgsfield). Usar la herramienta de preguntas con opciones. No asumir la calidad aunque "std" sea la habitual, y no generar hasta tener la respuesta. En `/automatico`, esta pregunta va dentro de la pregunta única del inicio, junto con el presupuesto, y la respuesta queda en `calidad_kling` y `presupuesto_creditos` del estado. Ese presupuesto es la aprobación del costo.
 
 ## Reglas de clip
 
@@ -27,8 +27,9 @@ Confirmar con Enrique la calidad elegida, el número de clips y el costo en cré
 ## Cómo generar sin gastar créditos de Claude
 
 1. Enviar **todos** los clips de la propiedad en **un solo** `generate_video_batch`. Guardar los job_id en `estado-<propiedad>.md`.
-2. Después de enviar, **no** preguntar si ya terminaron. Terminar el turno con: "Enviados N clips. Escríbeme 'listo' en unos 4 minutos."
-3. Cuando Enrique escriba "listo", hacer **una sola** llamada a `jobs_wait`. Solo si algún job sigue en proceso, avisar y volver a esperar el "listo".
+2. Después de enviar, **no** preguntar a cada rato si ya terminaron.
+   - En modo manual: terminar el turno con "Enviados N clips. Escríbeme 'listo' en unos 4 minutos." y, al recibir el "listo", hacer **una sola** llamada a `jobs_wait`.
+   - En `/automatico`: **una sola** llamada `sleep 240` y luego **una sola** llamada a `jobs_wait`. Si quedan jobs en proceso, `sleep 60` y otra llamada a `jobs_wait`, como máximo 6 veces.
 4. Nunca usar `show_generations`, porque repite el prompt completo de cada clip. Los job_id ya están en el archivo de estado.
 5. Si hay reintentos, van **todos juntos** en un solo batch, nunca uno por uno.
 6. Esta fase es mecánica: conviene hacerla con Sonnet, en un chat nuevo que solo lea `estado-<propiedad>.md`.

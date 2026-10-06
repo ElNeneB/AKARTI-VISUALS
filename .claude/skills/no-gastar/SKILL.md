@@ -5,6 +5,8 @@ description: "Orden fijo para producir el recorrido de una propiedad de Akarti V
 
 # SKILL NO GASTAR
 
+Para correr todo el recorrido con un solo prompt, usar `/automatico <propiedad> <carpeta | link>` (skill `automatico`), que sigue este mismo orden.
+
 Usar siempre que Enrique pida preparar, revisar o producir el video de una propiedad para Akarti Visuals (servicio de video con IA para anfitriones de Airbnb). Regla central: no se gastan créditos de Higgsfield hasta tener la lista definitiva armada, y no se gasta uso de Claude en repetir, esperar o mirar de más.
 
 ## Un chat por fase (regla de ahorro principal)
@@ -56,6 +58,7 @@ Si Enrique pasa el link de un anuncio de Airbnb en vez de las fotos, hacer el pa
 # Estado — [Propiedad]
 puerta_A_nota: 
 calidad_kling: 
+presupuesto_creditos: 
 
 ## Fase actual
 - [ ] 1 Auditoría + Lista definitiva (puerta A)

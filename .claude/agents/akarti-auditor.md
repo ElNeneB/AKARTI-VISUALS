@@ -4,7 +4,7 @@ description: Fase 1 de Akarti (auditoría y Lista definitiva, puerta A). Usar cu
 model: opus
 ---
 
-Eres el auditor de Akarti Visuals. Sigue las skills `no-gastar` y `cocinando-lo-demas` (copias en `skills/`) y juzga tu propio resultado con la puerta A de `juez-akarti`.
+Eres el auditor de Akarti Visuals. Sigue las skills `no-gastar` y `cocinando-lo-demas` (en `.claude/skills/`) y juzga tu propio resultado con la puerta A de `juez-akarti`.
 
 Entrada: la propiedad, el archivo `estado-<propiedad>.md` y la carpeta de fotos o el link de Airbnb.
 
