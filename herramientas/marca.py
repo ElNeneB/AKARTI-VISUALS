@@ -72,13 +72,13 @@ def end_card(salida, ancho=1920, alto=1080):
     logo = Image.open(FUENTES.parent / "marca" / "logo-akarti.png")
     alto_logo = int(500 * k)
     logo = logo.resize((int(logo.width * alto_logo / logo.height), alto_logo), Image.LANCZOS)
-    y_logo = int(95 * k)
+    y_logo = int(190 * k)  # el bloque va abajo, pegado al número
     fondo.alpha_composite(logo, (int(cx - logo.width / 2), y_logo))
     y_linea = y_logo + alto_logo + int(48 * k)
     d.line([cx - 70 * k, y_linea, cx + 70 * k, y_linea], fill=CHAMPAN, width=max(1, int(2 * k)))
     texto_espaciado(d, cx, y_linea + int(34 * k), lema, serif_italica(int(50 * k), 400),
                     CHAMPAN, int(5 * k))
-    texto_espaciado(d, cx, alto * 0.855, contacto, sans(int(44 * k), 400), HUESO, int(6 * k))
+    texto_espaciado(d, cx, alto * 0.875, contacto, sans(int(44 * k), 400), HUESO, int(6 * k))
     fondo.convert("RGB").save(salida)
     print(salida)
 
