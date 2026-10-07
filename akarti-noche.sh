@@ -21,8 +21,21 @@ decir() { echo "[$(date +%H:%M)] $*" | tee -a "$RESUMEN"; }
 for c in claude ffmpeg ffprobe python3 git caffeinate; do
   command -v "$c" >/dev/null 2>&1 || { echo "Falta '$c'. Instálalo y vuelve a ejecutar (ffmpeg: brew install ffmpeg)."; exit 1; }
 done
-git fetch -q origin "$RAMA" && git checkout -q "$RAMA" && git pull -q origin "$RAMA" || echo "Aviso: no pude actualizar la rama $RAMA; sigo con lo que hay."
-python3 -c "import PIL" 2>/dev/null || python3 -m pip install --user -q pillow || { echo "No pude instalar Pillow (python3 -m pip install --user pillow)."; exit 1; }
+# Actualizar y volver a arrancar con la versión nueva del script (una sola vez)
+if [ -z "${AKARTI_ACTUALIZADO:-}" ]; then
+  git fetch -q origin "$RAMA" && git checkout -q "$RAMA" && git pull -q origin "$RAMA" || echo "Aviso: no pude actualizar la rama $RAMA; sigo con lo que hay."
+  export AKARTI_ACTUALIZADO=1
+  exec "$0" "$@"
+fi
+# Pillow en un entorno propio del proyecto (.venv): el Python de Homebrew no deja
+# instalar paquetes globales (PEP 668) y así no se toca el Python del sistema.
+if ! python3 -c "import PIL" 2>/dev/null; then
+  [ -x .venv/bin/python3 ] || python3 -m venv .venv || { echo "No pude crear el entorno .venv de Python."; exit 1; }
+  .venv/bin/python3 -c "import PIL" 2>/dev/null || .venv/bin/python3 -m pip install -q pillow \
+    || { echo "No pude instalar Pillow en .venv (revisa la conexión a internet)."; exit 1; }
+fi
+# Todo lo que corra después (incluido Claude) usa este python3
+[ -x .venv/bin/python3 ] && export PATH="$PWD/.venv/bin:$PATH"
 ffmpeg -hide_banner -filters 2>/dev/null | grep -q vidstabdetect || echo "Aviso: tu ffmpeg no tiene vidstab; los teasers saldrán sin estabilizar (brew reinstall ffmpeg lo suele traer)."
 claude mcp list 2>/dev/null | grep -qi higgs || echo "Aviso: no veo el conector de Higgsfield en Claude Code. Revisa que estés con tu cuenta de claude.ai (claude /login)."
 

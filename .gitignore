@@ -13,3 +13,4 @@ biblioteca/musica/*.m4a
 biblioteca/room-tone/*.wav
 *_tmp/
 .DS_Store
+.venv/
