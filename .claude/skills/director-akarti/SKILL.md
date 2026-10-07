@@ -56,7 +56,7 @@ Redacta el prompt de música en inglés y explícalo en español. Debe especific
 ## TEXTO Y BRANDING
 - Mínimo texto. Identidad de Akarti (6/10/2026): **Cormorant Garamond** para la marca y los títulos, **Jost** Light con tracking amplio para los textos pequeños. Paleta: carbón cálido `#121110`, blanco hueso `#EDE6DA` y acento champán `#B8996A`. **No usar azul eléctrico.** Los elementos ya están hechos en `assets/marca/` y se generan con `herramientas/marca.py`.
 - Nombre de la propiedad al inicio: pequeño, discreto, con entrada sutil.
-- End card de Akarti Visuals de 2 a 3 s: `assets/marca/end-card-16x9.png` (AKARTI · REAL ESTATE VISUALS · TU PROPIEDAD, EN MOVIMIENTO. · WhatsApp +51 908 812 483).
+- End card de Akarti Visuals de 2 a 3 s: `assets/marca/end-card-16x9.png`, con el **logo oficial** (emblema plateado + AKARTI REAL ESTATE VISUALS, `assets/marca/logo-akarti.png`), el lema "TU PROPIEDAD, EN MOVIMIENTO." en champán y el WhatsApp +51 908 812 483 en grande. No redibujar el logo con otra tipografía.
 - Versión demo: marca de agua diagonal repetida al 10 % (`assets/marca/marca-agua-16x9.png`), solo sobre los clips, nunca sobre el end card.
 - Versión vertical 9:16: se trata como una edición propia con reencuadre clip por clip, no como un recorte central.
 

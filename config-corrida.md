@@ -6,7 +6,7 @@
 - **Tope total de créditos de Higgsfield:** 700 para todo (pendientes + teasers + producto final). Lo controla `presupuesto-corrida.json` con la guardia. **No empezar** una propiedad si lo que queda no alcanza para terminarla completa (reserva de 36 créditos por teaser). Nunca dejar trabajo a medias.
 - **Modo:** teaser (los 3 espacios más fuertes, con movimientos distintos; unos 12 a 15 s con el end card).
 - **Versión:** demo con marca de agua **diagonal repetida al 10 %** (`assets/marca/marca-agua-16x9.png`).
-- **End card:** `assets/marca/end-card-16x9.png` (AKARTI · REAL ESTATE VISUALS · TU PROPIEDAD, EN MOVIMIENTO. · WhatsApp +51 908 812 483). Paleta carbón, hueso y champán; Cormorant Garamond + Jost. Nada de azul eléctrico.
+- **End card:** `assets/marca/end-card-16x9.png`: logo oficial de Akarti, lema "TU PROPIEDAD, EN MOVIMIENTO." y WhatsApp +51 908 812 483 en grande. Paleta carbón, hueso y champán; Cormorant Garamond + Jost. Nada de azul eléctrico.
 - **Título:** nombre corto de la propiedad + zona, con `python3 herramientas/marca.py titulo "Nombre" "Zona" teasers/<slug>/titulo.png`.
 - **Edición:** render automático con `python3 herramientas/akarti.py render` (sin Premiere).
 - **Música:** biblioteca creada en Gemini (`biblioteca/musica/indice.csv`), elegida por personalidad. Si no hay pista, render sin música y anotarlo.

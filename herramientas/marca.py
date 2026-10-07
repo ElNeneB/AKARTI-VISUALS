@@ -58,25 +58,28 @@ def texto_espaciado(d, centro_x, y, texto, f, color, tracking):
 
 
 def end_card(salida, ancho=1920, alto=1080):
+    """End card con el logo oficial (emblema + AKARTI REAL ESTATE VISUALS), el lema y el WhatsApp."""
     ancho, alto = int(ancho), int(alto)
     k = alto / 1080
     fondo = Image.new("RGB", (ancho, alto), CARBON)
     luz = Image.new("L", (ancho, alto), 0)
-    ImageDraw.Draw(luz).ellipse([ancho * 0.18, alto * 0.05, ancho * 0.82, alto * 0.95], fill=255)
+    ImageDraw.Draw(luz).ellipse([ancho * 0.18, alto * 0.02, ancho * 0.82, alto * 0.92], fill=255)
     luz = luz.filter(ImageFilter.GaussianBlur(int(260 * k)))
-    fondo = Image.composite(Image.new("RGB", (ancho, alto), CARBON_CLARO), fondo, luz)
+    fondo = Image.composite(Image.new("RGB", (ancho, alto), CARBON_CLARO), fondo, luz).convert("RGBA")
     d = ImageDraw.Draw(fondo)
     cx = ancho / 2
-    marca, sub, lema, contacto = END_CARD
-    f1 = serif(int(150 * k), 500)
-    texto_espaciado(d, cx, alto * 0.30, marca, f1, HUESO, int(38 * k))
-    y_linea = alto * 0.30 + f1.size * 1.12
-    d.line([cx - 60 * k, y_linea, cx + 60 * k, y_linea], fill=CHAMPAN, width=max(1, int(2 * k)))
-    texto_espaciado(d, cx, y_linea + 28 * k, sub, sans(int(28 * k), 300), HUESO, int(13 * k))
-    texto_espaciado(d, cx, alto * 0.62, lema, serif_italica(int(44 * k), 400), CHAMPAN, int(4 * k))
-    texto_espaciado(d, cx, alto * 0.84, contacto, sans(int(26 * k), 300),
-                    tuple(int(c * 0.82) for c in HUESO), int(6 * k))
-    fondo.save(salida)
+    _, _, lema, contacto = END_CARD
+    logo = Image.open(FUENTES.parent / "marca" / "logo-akarti.png")
+    alto_logo = int(500 * k)
+    logo = logo.resize((int(logo.width * alto_logo / logo.height), alto_logo), Image.LANCZOS)
+    y_logo = int(95 * k)
+    fondo.alpha_composite(logo, (int(cx - logo.width / 2), y_logo))
+    y_linea = y_logo + alto_logo + int(48 * k)
+    d.line([cx - 70 * k, y_linea, cx + 70 * k, y_linea], fill=CHAMPAN, width=max(1, int(2 * k)))
+    texto_espaciado(d, cx, y_linea + int(34 * k), lema, serif_italica(int(50 * k), 400),
+                    CHAMPAN, int(5 * k))
+    texto_espaciado(d, cx, alto * 0.855, contacto, sans(int(44 * k), 400), HUESO, int(6 * k))
+    fondo.convert("RGB").save(salida)
     print(salida)
 
 
