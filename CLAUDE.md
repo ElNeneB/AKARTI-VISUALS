@@ -14,5 +14,6 @@ Recorridos en video con IA para propiedades de Airbnb (Kling 3.0 en Higgsfield +
 - DOLLY y AXIS LOCK llevan fotograma final (`final-push`, en prueba). Upscale a 1080p solo de los clips aprobados.
 - Memoria en `aprendizajes.md`, música y room tone de `biblioteca/`, montaje con `akarti.py montaje` sobre la plantilla maestra, costo por video en `registro.csv`.
 - Tope por corrida en `presupuesto-corrida.json` (la guardia bloquea lo que lo pase). Corrida nocturna: `./akarti-noche.sh`, modo desatendido con `config-corrida.md`.
+- Headroom (ahorro de tokens): `akarti-noche.sh` corre por `headroom wrap claude` en el puerto 8788 sin comprimir imágenes (`HEADROOM_COMPRESSORS` sin `image`) ni las respuestas de MCP, Skill y agentes (`HEADROOM_EXCLUDE_TOOLS`). Para trabajar a mano con Headroom y la misma calidad, exporta esas dos variables antes de `hc`.
 - Marca: Cormorant Garamond + Jost; carbón, hueso y champán; nada de azul eléctrico (`assets/marca/`).
 - Si cambias una skill aquí, cámbiala también en claude.ai (o vuelve a subir su `.skill`).

@@ -48,6 +48,24 @@ decir "Inicio. Desde aquí no pregunto nada más. Registro: $CORRIDA/"
 caffeinate -dimsu -w $$ &   # el Mac no se duerme mientras corre
 
 CLAUDE=(claude -p --dangerously-skip-permissions --model sonnet)
+if command -v headroom >/dev/null 2>&1; then
+  # Headroom ahorra tokens comprimiendo lo que Claude lee, pero en esta corrida NO toca
+  # lo que define la calidad:
+  #  - imágenes (el juez necesita ver las hojas 2x2 sin achicar ni convertir a texto)
+  #  - respuestas de Higgsfield y demás MCP (job_id, costos y saldo exactos)
+  #  - skills y reportes de los agentes (prompts de cámara y notas tal cual)
+  # Read, Grep, Write y Edit ya están protegidos por defecto en Headroom. Lo que sí
+  # comprime son los registros largos de Bash (ffmpeg, descargas), donde está el ahorro;
+  # si Claude necesita el original, lo recupera con headroom_retrieve.
+  export HEADROOM_COMPRESSORS="smart_crusher,kompress,code_aware,search,log,tabular,config,html"
+  export HEADROOM_EXCLUDE_TOOLS="mcp__*,Skill,Agent,Task"
+  # Puerto propio (8788) para no mezclar esta configuración con tu sesión de 'hc' (8787).
+  CLAUDE=(headroom wrap claude --port 8788 --tool-search true --code-memory none --
+          -p --dangerously-skip-permissions --model sonnet)
+  echo "Headroom activo: la corrida ahorra tokens sin comprimir imágenes, Higgsfield ni skills."
+else
+  echo "Aviso: no encontré Headroom; la corrida usa Claude directo (sin compresión extra)."
+fi
 claude --help 2>/dev/null | grep -q -- "--chrome" && CHROME="--chrome" || CHROME=""
 paso() {  # paso NOMBRE [--chrome] "PROMPT"
   local nombre="$1"; shift

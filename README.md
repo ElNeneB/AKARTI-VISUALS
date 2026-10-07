@@ -24,7 +24,7 @@ Para seguir, se vuelve a escribir el mismo comando.
 cd ~/AKARTI-VISUALS && ./akarti-noche.sh
 ```
 
-Pregunta 3 cosas al inicio (tope de créditos, permisos, Mac listo) y después corre sola: prueba del fotograma final, música en Gemini, rescate de los clips del 6/10 y un teaser por propiedad de `propiedades-teaser.csv` (de tu hoja de Drive "Pasaron el check"), hasta agotar el tope sin dejar nada a medias. Si se corta, vuelve a ejecutarla y retoma.
+Pregunta 3 cosas al inicio (tope de créditos, permisos, Mac listo) y después corre sola: prueba del fotograma final, música en Gemini, rescate de los clips del 6/10 y un teaser por propiedad de `propiedades-teaser.csv` (de tu hoja de Drive "Pasaron el check"), hasta agotar el tope sin dejar nada a medias. Si se corta, vuelve a ejecutarla y retoma. Si tienes Headroom instalado, la corrida pasa por él automáticamente (ahorra tokens en los registros largos) y deja sin comprimir las imágenes, las respuestas de Higgsfield y las skills, para no perder calidad.
 
 ## Qué hay en cada carpeta
 
