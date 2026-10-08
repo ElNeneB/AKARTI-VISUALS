@@ -4,6 +4,7 @@
   python3 corrida.py lista        Cola de teasers pendientes (una línea por propiedad, separada por |)
   python3 corrida.py restante     Créditos que quedan del tope (presupuesto-corrida.json)
   python3 corrida.py resumen      Resumen final: teasers hechos, créditos y pendientes
+  python3 corrida.py terminados   Nombres (tal cual en la hoja) de las propiedades con teaser listo
 """
 import csv
 import json
@@ -98,8 +99,21 @@ def resumen():
     print(f"Propiedades sin teaser: {pendientes}")
 
 
+def terminados():
+    hecho_180 = False
+    filas = list(propiedades())
+    for p in filas:
+        if p["id"] == "180":
+            hecho_180 = hecho(slug(p["nombre"]))
+    for p in filas:
+        listo = hecho(slug(p["nombre"])) or (p["id"] == "181" and hecho_180)
+        if listo:
+            print(p["nombre"])
+
+
 if __name__ == "__main__":
-    comandos = {"lista": lista, "restante": restante, "resumen": resumen}
+    comandos = {"lista": lista, "restante": restante, "resumen": resumen,
+                "terminados": terminados}
     if len(sys.argv) < 2 or sys.argv[1] not in comandos:
         sys.exit(__doc__)
     comandos[sys.argv[1]]()
