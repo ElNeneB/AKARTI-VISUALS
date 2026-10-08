@@ -84,9 +84,25 @@ paso() {  # paso NOMBRE [--chrome] "PROMPT"
   local nombre="$1"; shift
   if [ "$1" = "--chrome" ]; then shift; [ -n "$CHROME" ] && set -- "$CHROME" "$@"; fi
   decir "▶ $nombre"
-  # < /dev/null: que Claude no se coma la cola de propiedades del bucle
-  "${CLAUDE[@]}" "$@" < /dev/null > "$CORRIDA/$nombre.log" 2>&1
-  decir "  ✓ $nombre (código $?) — quedan $(python3 herramientas/corrida.py restante) créditos"
+  local intento codigo
+  for intento in 1 2 3 4 5 6 7 8 9 10 11 12; do
+    # < /dev/null: que Claude no se coma la cola de propiedades del bucle
+    "${CLAUDE[@]}" "$@" < /dev/null > "$CORRIDA/$nombre.log" 2>&1
+    codigo=$?
+    # Límite de uso de Claude: esperar y repetir la MISMA propiedad (no saltarla)
+    if grep -qiE "usage limit|limit reached|rate.?limit|resets? (at|in)|overloaded" "$CORRIDA/$nombre.log"; then
+      decir "  ⏸ $nombre: límite de uso de Claude. Espero 30 min y reintento ($intento/12)."
+      sleep 1800
+      continue
+    fi
+    break
+  done
+  if [ "$codigo" -eq 0 ]; then
+    decir "  ✓ $nombre — quedan $(python3 herramientas/corrida.py restante) créditos"
+  else
+    decir "  ✗ $nombre (código $codigo) — quedan $(python3 herramientas/corrida.py restante) créditos"
+    tail -n 3 "$CORRIDA/$nombre.log" | sed 's/^/      /' | tee -a "$RESUMEN"
+  fi
 }
 
 # ---------------------------------------------------------------- 1. pendientes

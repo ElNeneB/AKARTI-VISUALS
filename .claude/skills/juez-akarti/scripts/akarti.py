@@ -432,7 +432,7 @@ def room_tone(tipo, salida, segundos="90"):
     filtros = {
         "interior": f"anoisesrc=d={d}:c=brown:a=0.5,lowpass=f=380,highpass=f=40,volume=-6dB",
         "ciudad": f"anoisesrc=d={d}:c=brown:a=0.5,lowpass=f=260,highpass=f=35,"
-                  f"tremolo=f=0.07:d=0.25,volume=-4dB",
+                  f"tremolo=f=0.1:d=0.25,volume=-4dB",
         "mar": f"anoisesrc=d={d}:c=pink:a=0.5,bandpass=f=420:w=600,"
                f"tremolo=f=0.11:d=0.7,lowpass=f=1800,volume=-3dB",
     }
