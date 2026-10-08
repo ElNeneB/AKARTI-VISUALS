@@ -115,3 +115,4 @@ Teasers listos: 3
   teasers/villa-adhistana-las-pocitas/teaser-villa-adhistana-las-pocitas.mp4
 Créditos comprometidos: 331.5 de 700
 Propiedades sin teaser: 47
+[14:36] Fin. Teasers en teasers/<propiedad>/ · resumen en corridas/20261007-1029/resumen.txt
