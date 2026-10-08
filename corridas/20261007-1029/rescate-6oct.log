@@ -1,0 +1,44 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Port 8788 is in use, using port 8789 instead.
+  Starting Headroom proxy on port 8789...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8789.log
+  Proxy ready on http://127.0.0.1:8789
+  Dashboard:    http://127.0.0.1:8789/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8789'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8789 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8789
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Modo desatendido: no hagas preguntas. Sigue los pasos de rescate-6oct.md: descarga los 15 clips y sus fotos de inicio con curl, arma la hoja 2x2 de cada uno y júzgalos con akarti-juez-rapido (Opus solo en la frontera). Anota la nota de cada uno en la tabla y crea el archivo rescate-6oct/LISTO. No generes nada en Higgsfield.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+Juzgué los 15 clips, anoté las notas en la columna "puerta B" de `rescate-6oct.md` y creé `rescate-6oct/LISTO`. Ocho clips pasan y siete no. No generé nada en Higgsfield.
+
+**Pasan (nota 9 o 10):**
+
+| Nota | Clips |
+|---|---|
+| 10 | 1, 4, 6, 7, 11, 12, 13 |
+| 9 | 5, 8 |
+
+El clip 5 tiene dos micro-saltos al arranque, que se recorta. En el 8 la velocidad sube sin parar.
+
+**Repiten (nota menor a 9):**
+
+| # | Nota | Motivo |
+|---|---|---|
+| 2 | 6 | Se deforman las almohadas y los cojines. |
+| 3 | 7 | Se reacomodan los cojines y las almohadas. |
+| 9 | 5 | La ventana y la pared se estiran, y aparece una puerta que no estaba. |
+| 10 | 5 | Desaparece el poste de la ventana y entra un mueble que no está en la foto. |
+| 14 | 5 | Aparece una palmera donde la foto muestra cielo. |
+| 15 | 5 | Aparece un cuadro en la pared que no está en la foto. |
+
+El clip 15 ya tiene un upscale a 1080p en curso (job 25960859-c331-49fd-9d5f-38385595e598), así que no debe usarse en el teaser.
+
+Opus revisó los 12 clips en la frontera. Como la frontera es nota 8 o 9, abarcó casi todos los clips. La columna "propiedad" quedó vacía, como indica el plan.

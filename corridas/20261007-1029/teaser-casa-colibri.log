@@ -1,0 +1,20 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Starting Headroom proxy on port 8788...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8788.log
+  Proxy ready on http://127.0.0.1:8788
+  Dashboard:    http://127.0.0.1:8788/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8788'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8788 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8788
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Usa la skill automatico en modo teaser y DESATENDIDO (lee config-corrida.md; no hagas ninguna pregunta). Propiedad: Casa Colibrí (hoja 73, zona Máncora, personalidad musical playa-luminosa). Link: https://www.airbnb.com.pe/rooms/1081051360759440033. Auditoría previa, fotos a usar: 39 (fachada con piscina), 21 (entrada), 14 (piscina vista mar), 18 (piscina con pérgola), 22 (piscina y playa), 32 (terraza de piscina), 17 (terraza con sombrillas), 27 (deck vista mar), 46 (deck con camastros), 43 (terraza de playa), 45 (balcones de madera), 11 (sala vista mar), 15 (sala), 26 (sala 2), 41 (sala 3), 28 (cocina), 29 (cocina 2), 34 (comedor y cocina), 38 (sala-comedor), 12 (dormitorio principal), 16 (dormitorio 2), 23 (dormitorio 3), 31 (camarotes), 36 (dormitorio vista mar), 52 (dormitorio con vista). Notas: 56 fotos profesionales con gran angular, luz de día uniforme. Muy completo.. Carpeta: teasers/casa-colibri/. Estado: estado-casa-colibri.md (créalo desde estado-PLANTILLA.md con calidad_kling: std y presupuesto_creditos: 36). Antes de generar, revisa con 'akarti.py identificar' si hay clips reutilizables en rescate-6oct/. Resultado: teasers/casa-colibri/teaser-casa-colibri.mp4, una línea en registro.csv y las líneas de aprendizajes.md. Si algo te bloquea, anótalo en el estado y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+API Error: 502 event: error
+data: {"type": "error", "error": {"type": "connection_error", "message": "Failed to connect to upstream API: [Errno 8] nodename nor servname provided, or not known"}}. This is a server-side issue, usually temporary — try again in a moment. If it persists, check your inference gateway (127.0.0.1:8788).

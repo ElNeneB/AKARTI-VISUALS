@@ -1,0 +1,117 @@
+[10:31] Inicio. Desde aquí no pregunto nada más. Registro: corridas/20261007-1029/
+[10:31] ▶ prueba-final
+[10:41]   ✓ prueba-final (código 0) — quedan 688.0 créditos
+[10:41] ▶ musica-playa-luminosa
+[10:46]   ✓ musica-playa-luminosa (código 0) — quedan 688.0 créditos
+[10:46] ▶ musica-campo-calido
+[10:52]   ✓ musica-campo-calido (código 0) — quedan 688.0 créditos
+[10:52] ▶ musica-moderno-urbano
+[10:59]   ✓ musica-moderno-urbano (código 0) — quedan 688.0 créditos
+[10:59] ▶ musica-lodge-andino
+[11:02]   ✓ musica-lodge-andino (código 0) — quedan 688.0 créditos
+[11:02] ▶ rescate-6oct
+[11:09]   ✓ rescate-6oct (código 0) — quedan 688.0 créditos
+[11:09] ▶ teaser-amantica-lodge-estancia-todo
+[11:23]   ✓ teaser-amantica-lodge-estancia-todo (código 1) — quedan 669.8 créditos
+[11:23] ▶ teaser-casa-mykita
+[11:25]   ✓ teaser-casa-mykita (código 1) — quedan 669.8 créditos
+[11:25] ▶ teaser-casablanca-pocitas-y-mancora
+[11:26]   ✓ teaser-casablanca-pocitas-y-mancora (código 1) — quedan 669.8 créditos
+[11:26] ▶ teaser-villa-pachacamac-boutique-grandes
+[11:27]   ✓ teaser-villa-pachacamac-boutique-grandes (código 1) — quedan 669.8 créditos
+[11:27] ▶ teaser-casa-samay-magia-y
+[11:30]   ✓ teaser-casa-samay-magia-y (código 1) — quedan 669.8 créditos
+[11:30] ▶ teaser-casa-punta-ala-en
+[14:29]   ✓ teaser-casa-punta-ala-en (código 1) — quedan 669.8 créditos
+[14:29] ▶ teaser-casa-las-mareas
+[16:10]   ✓ teaser-casa-las-mareas (código 0) — quedan 669.8 créditos
+[16:10] ▶ teaser-casa-nacho-punta-sal
+[19:12]   ✓ teaser-casa-nacho-punta-sal (código 0) — quedan 669.8 créditos
+[19:12] ▶ teaser-kassa-sunna-villa-frente
+[19:21]   ✓ teaser-kassa-sunna-villa-frente (código 0) — quedan 645.8 créditos
+[19:21] ▶ teaser-casa-kailani-las-pocitas
+[19:52]   ✓ teaser-casa-kailani-las-pocitas (código 0) — quedan 567.6 créditos
+[19:52] ▶ teaser-casa-tiempo-las-pocitas
+[20:20]   ✓ teaser-casa-tiempo-las-pocitas (código 0) — quedan 567.6 créditos
+[20:20] ▶ teaser-alu-luxe-duo-de
+[20:40]   ✓ teaser-alu-luxe-duo-de (código 0) — quedan 513.2 créditos
+[20:40] ▶ teaser-eywa-lodge-todo-incluido
+[21:02]   ✓ teaser-eywa-lodge-todo-incluido (código 0) — quedan 458.8 créditos
+[21:02] ▶ teaser-villa-adhistana-las-pocitas
+[21:20]   ✓ teaser-villa-adhistana-las-pocitas (código 0) — quedan 416.5 créditos
+[21:20] ▶ teaser-casa-tawa-lujo-privacidad
+[21:26]   ✓ teaser-casa-tawa-lujo-privacidad (código 1) — quedan 416.5 créditos
+[21:26] ▶ teaser-casa-alma-alma-loft
+[21:27]   ✓ teaser-casa-alma-alma-loft (código 1) — quedan 416.5 créditos
+[21:27] ▶ teaser-2-casas-killa-juntas
+[21:28]   ✓ teaser-2-casas-killa-juntas (código 1) — quedan 416.5 créditos
+[21:28] ▶ teaser-villa-punta-del-sol
+[21:29]   ✓ teaser-villa-punta-del-sol (código 1) — quedan 416.5 créditos
+[21:29] ▶ teaser-la-casa-de-sidi
+[21:30]   ✓ teaser-la-casa-de-sidi (código 1) — quedan 416.5 créditos
+[21:30] ▶ teaser-casa-villa-nirvana-playa
+[21:31]   ✓ teaser-casa-villa-nirvana-playa (código 1) — quedan 416.5 créditos
+[21:31] ▶ teaser-suite-de-lujo-en
+[21:32]   ✓ teaser-suite-de-lujo-en (código 1) — quedan 416.5 créditos
+[21:32] ▶ teaser-casa-anqamar-punta-mero
+[21:34]   ✓ teaser-casa-anqamar-punta-mero (código 1) — quedan 416.5 créditos
+[21:34] ▶ teaser-casa-diem-eco-luxury
+[21:35]   ✓ teaser-casa-diem-eco-luxury (código 1) — quedan 416.5 créditos
+[21:35] ▶ teaser-casa-grande-de-pachacamac
+[21:36]   ✓ teaser-casa-grande-de-pachacamac (código 1) — quedan 416.5 créditos
+[21:36] ▶ teaser-casa-de-mate-las
+[21:37]   ✓ teaser-casa-de-mate-las (código 1) — quedan 416.5 créditos
+[21:37] ▶ teaser-casa-arrecifes-de-punta
+[21:38]   ✓ teaser-casa-arrecifes-de-punta (código 1) — quedan 416.5 créditos
+[21:38] ▶ teaser-suites-domo-vertical-sky
+[21:39]   ✓ teaser-suites-domo-vertical-sky (código 1) — quedan 416.5 créditos
+[21:39] ▶ teaser-casa-campo-mar-k
+[21:40]   ✓ teaser-casa-campo-mar-k (código 1) — quedan 416.5 créditos
+[21:40] ▶ teaser-nuna-wasi-villa-9
+[21:41]   ✓ teaser-nuna-wasi-villa-9 (código 1) — quedan 416.5 créditos
+[21:41] ▶ teaser-casa-colibri
+[23:10]   ✓ teaser-casa-colibri (código 1) — quedan 416.5 créditos
+[23:10] ▶ teaser-villa-nuna-lujo-y
+[23:40]   ✓ teaser-villa-nuna-lujo-y (código 1) — quedan 416.5 créditos
+[23:40] ▶ teaser-espectacular-casa-de-campo
+[23:41]   ✓ teaser-espectacular-casa-de-campo (código 1) — quedan 416.5 créditos
+[23:41] ▶ teaser-casa-en-el-aire
+[23:43]   ✓ teaser-casa-en-el-aire (código 1) — quedan 416.5 créditos
+[23:43] ▶ teaser-la-casa-en-huaripampa
+[23:44]   ✓ teaser-la-casa-en-huaripampa (código 1) — quedan 416.5 créditos
+[23:44] ▶ teaser-casa-norte-frente-al
+[23:45]   ✓ teaser-casa-norte-frente-al (código 1) — quedan 416.5 créditos
+[23:45] ▶ teaser-casa-bamboo-punta-sal
+[23:46]   ✓ teaser-casa-bamboo-punta-sal (código 1) — quedan 416.5 créditos
+[23:46] ▶ teaser-casa-manta-eco-luxury
+[23:47]   ✓ teaser-casa-manta-eco-luxury (código 1) — quedan 416.5 créditos
+[23:47] ▶ teaser-casa-killa-fila-1
+[23:49]   ✓ teaser-casa-killa-fila-1 (código 1) — quedan 416.5 créditos
+[23:49] ▶ teaser-casa-sol-vichayito
+[23:50]   ✓ teaser-casa-sol-vichayito (código 1) — quedan 416.5 créditos
+[23:50] ▶ teaser-frente-al-mar-casa
+[23:52]   ✓ teaser-frente-al-mar-casa (código 1) — quedan 416.5 créditos
+[23:52] ▶ teaser-casa-gaia-con-a
+[23:57]   ✓ teaser-casa-gaia-con-a (código 1) — quedan 416.5 créditos
+[23:57] ▶ teaser-iquitos-lodge-house-con
+[23:58]   ✓ teaser-iquitos-lodge-house-con (código 1) — quedan 416.5 créditos
+[23:58] ▶ teaser-casa-terra-pocitas
+[00:00]   ✓ teaser-casa-terra-pocitas (código 1) — quedan 416.5 créditos
+[00:00] ▶ teaser-punta-sal-luxury-beachfront
+[00:01]   ✓ teaser-punta-sal-luxury-beachfront (código 1) — quedan 416.5 créditos
+[00:01] ▶ teaser-santa-cruz-lodge-superior
+[00:02]   ✓ teaser-santa-cruz-lodge-superior (código 1) — quedan 416.5 créditos
+[00:02] ▶ teaser-casa-blanca-villa-en
+[00:04]   ✓ teaser-casa-blanca-villa-en (código 1) — quedan 416.5 créditos
+[00:04] ▶ teaser-la-casona-de-pompeya
+[00:05]   ✓ teaser-la-casona-de-pompeya (código 1) — quedan 416.5 créditos
+[00:05] ▶ teaser-casa-killa-luxury-punta
+[02:41]   ✓ teaser-casa-killa-luxury-punta (código 0) — quedan 416.5 créditos
+[02:41] ▶ teaser-la-hacienda-del-mago
+[14:36]   ✓ teaser-la-hacienda-del-mago (código 1) — quedan 368.5 créditos
+Teasers listos: 3
+  teasers/alu-luxe-duo-de/teaser-alu-luxe-duo-de.mp4
+  teasers/eywa-lodge-todo-incluido/teaser-eywa-lodge-todo-incluido.mp4
+  teasers/villa-adhistana-las-pocitas/teaser-villa-adhistana-las-pocitas.mp4
+Créditos comprometidos: 331.5 de 700
+Propiedades sin teaser: 47

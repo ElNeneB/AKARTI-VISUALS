@@ -1,0 +1,20 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Starting Headroom proxy on port 8788...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8788.log
+  Proxy ready on http://127.0.0.1:8788
+  Dashboard:    http://127.0.0.1:8788/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8788'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8788 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8788
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Usa la skill automatico en modo teaser y DESATENDIDO (lee config-corrida.md; no hagas ninguna pregunta). Propiedad: Casa Las Mareas (hoja 122, zona Talara, personalidad musical playa-luminosa). Link: https://www.airbnb.com.pe/rooms/1285500789458228766. Auditoría previa, fotos a usar: 49 (fachada con piscina), 1 (jardín y piscina), 3 (piscina vista mar), 2 (terraza de playa), 4 (gazebo de paja), 6 (bar de jardín), 43 (sala principal), 42 (sala de piedra), 44 (sala abierta al jardín), 11 (sala 2), 12 (sala TV), 46 (cocina), 48 (cocina con barra), 15 (pasillo de madera), 45 (escalera), 7 (dormitorio principal), 10 (dormitorio 2), 16 (dormitorio 3), 20 (dormitorio 4), 22 (dormitorio 5), 28 (camarotes), 31 (dormitorio 6), 35 (dormitorio vista jardín), 38 (dormitorio con camarote). Notas: 50 fotos profesionales, luz de día uniforme. Muy completo; sobran dormitorios, elegir 3-4 para el recorrido.. Carpeta: teasers/casa-las-mareas/. Estado: estado-casa-las-mareas.md (créalo desde estado-PLANTILLA.md con calidad_kling: std y presupuesto_creditos: 36). Antes de generar, revisa con 'akarti.py identificar' si hay clips reutilizables en rescate-6oct/. Resultado: teasers/casa-las-mareas/teaser-casa-las-mareas.mp4, una línea en registro.csv y las líneas de aprendizajes.md. Si algo te bloquea, anótalo en el estado y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+Background tasks still running 10m after the last turn (shell "mkdir -p teasers/casa-las-mareas && cp estado-PLANTILLA.md e", monitor "Wait for photo download to finish"); stopping them. Set CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS=0 to wait indefinitely.
+Estoy descargando las fotos de Airbnb en segundo plano y sigo cuando termine.

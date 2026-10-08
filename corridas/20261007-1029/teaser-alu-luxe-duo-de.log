@@ -1,0 +1,31 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Port 8788 is in use, using port 8789 instead.
+  Starting Headroom proxy on port 8789...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8789.log
+  Proxy ready on http://127.0.0.1:8789
+  Dashboard:    http://127.0.0.1:8789/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8789'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8789 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8789
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Usa la skill automatico en modo teaser y DESATENDIDO (lee config-corrida.md; no hagas ninguna pregunta). Propiedad: ALU Luxe - Dúo de 8 habitaciones con vista al mar en Larcomar (hoja 142, zona Lima, personalidad musical moderno-urbano). Link: https://www.airbnb.com.pe/rooms/1616272321570679871. Auditoría previa, fotos a usar: 1 (sala), 6 (sala con vista al mar), 14 (sala TV), 26 (comedor), 28 (comedor y cocina), 22 (cocina), 89 (terraza atardecer), 90 (terraza vista mar), 30 (dormitorio principal), 39 (dormitorio 2), 62 (dormitorio twin), 85 (estudio), 98 (gimnasio). Notas: 104 fotos (reauditado; la primera pasada solo había leído 15).. Carpeta: teasers/alu-luxe-duo-de/. Estado: estado-alu-luxe-duo-de.md (créalo desde estado-PLANTILLA.md con calidad_kling: std y presupuesto_creditos: 36). Antes de generar, revisa con 'akarti.py identificar' si hay clips reutilizables en rescate-6oct/. Resultado: teasers/alu-luxe-duo-de/teaser-alu-luxe-duo-de.mp4, una línea en registro.csv y las líneas de aprendizajes.md. Si algo te bloquea, anótalo en el estado y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+El teaser de ALU Luxe está renderizado, pero la puerta C lo calificó 7 (REPITE) y no lo re-juzgué después de alargarlo. Dura 11 s, no los 12 a 15 s del objetivo, y solo tiene la sala y el dormitorio. Quedó en `teasers/alu-luxe-duo-de/teaser-alu-luxe-duo-de.mp4`.
+
+- **Puertas:**
+  - Puerta A: 10.
+  - Puerta B: sala 10 y dormitorio principal 10.
+  - Puerta C: 7. Fallaron la música (4), el nivel de audio (7) y la duración (10).
+- **Comedor descartado:** tras 2 reintentos sacó 5 y luego 6 por manchas inventadas en la pared, el techo y la mesa. La corrida siguió sin él.
+- **Sin música:** la pista moderno-urbano no existe en la biblioteca (el intento en Gemini quedó en `biblioteca/musica/PENDIENTE.md`). El video lleva solo room tone, que mide -27,9 LUFS, muy lejos del rango de -15 a -13.
+- **Duración:** alargué el end card a 4,5 s y quedó en 11 s.
+- **Créditos:** gasté unos 24,2 de los 36 aprobados (3 clips más 1 reintento, y el upscale). El tope de 700 queda en 186,6 comprometidos. Anoté la fila en `registro.csv` y las líneas en `aprendizajes.md`.
+
+Queda por decidir si el teaser sirve con 2 clips. Para subir la nota hace falta la pista moderno-urbano; con ella se re-renderiza a -14 LUFS con los cortes sobre los beats. Todo está anotado en `estado-alu-luxe-duo-de.md`.

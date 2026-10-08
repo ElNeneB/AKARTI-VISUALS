@@ -1,0 +1,19 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Starting Headroom proxy on port 8788...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8788.log
+  Proxy ready on http://127.0.0.1:8788
+  Dashboard:    http://127.0.0.1:8788/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8788'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8788 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8788
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Usa la skill automatico en modo teaser y DESATENDIDO (lee config-corrida.md; no hagas ninguna pregunta). Propiedad: Casa Blanca - Villa en Canoas de Punta Sal (hoja 195, zona Canoas, personalidad musical playa-luminosa). Link: https://www.airbnb.com.pe/rooms/998824772153997755. Auditoría previa, fotos a usar: 55 (piscina), 56 (piscina 2), 43 (terraza de playa con camastros), 44 (terraza de piscina al atardecer), 50 (comedor de terraza), 47 (bar exterior), 51 (zona de juegos/ping-pong), 1 (patio interior), 33 (patio con escalera), 34 (patio 2), 2 (sala), 3 (sala 2), 7 (cocina-comedor), 8 (cocina), 13 (comedor), 17 (dormitorio vista mar), 18 (dormitorio principal), 20 (dormitorio 3), 23 (camarotes), 24 (camarotes 2), 26 (dormitorio con mesa), 29 (dormitorio 4). Notas: 62 fotos profesionales. Varias interiores tienen luz cálida de tarde (1, 7, 8, 33, 34, 44, 47, 50): consistentes entre sí, pero ojo al mezclarlas con las de día.. Carpeta: teasers/casa-blanca-villa-en/. Estado: estado-casa-blanca-villa-en.md (créalo desde estado-PLANTILLA.md con calidad_kling: std y presupuesto_creditos: 36). Antes de generar, revisa con 'akarti.py identificar' si hay clips reutilizables en rescate-6oct/. Resultado: teasers/casa-blanca-villa-en/teaser-casa-blanca-villa-en.mp4, una línea en registro.csv y las líneas de aprendizajes.md. Si algo te bloquea, anótalo en el estado y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+You've hit your session limit · resets 1:30am (America/Lima)

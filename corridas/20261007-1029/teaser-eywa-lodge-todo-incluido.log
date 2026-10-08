@@ -1,0 +1,33 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Starting Headroom proxy on port 8788...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8788.log
+  Proxy ready on http://127.0.0.1:8788
+  Dashboard:    http://127.0.0.1:8788/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8788'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8788 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8788
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Usa la skill automatico en modo teaser y DESATENDIDO (lee config-corrida.md; no hagas ninguna pregunta). Propiedad: Eywa Lodge todo incluido IV (hoja 182, zona Saquena, personalidad musical lodge-andino). Link: https://www.airbnb.com.pe/rooms/778014664870724874. Auditoría previa, fotos a usar: 2 (bungalow exterior), 11 (pasarela techada), 4 (sala de estar), 1 (dormitorio), 6 (dormitorio, ventanas a la selva). Notas: 16 fotos, la mayoría de experiencia. Justo en el mínimo (5 fotos, 4 espacios). 1 y 6 son el mismo dormitorio.. Carpeta: teasers/eywa-lodge-todo-incluido/. Estado: estado-eywa-lodge-todo-incluido.md (créalo desde estado-PLANTILLA.md con calidad_kling: std y presupuesto_creditos: 36). Antes de generar, revisa con 'akarti.py identificar' si hay clips reutilizables en rescate-6oct/. Resultado: teasers/eywa-lodge-todo-incluido/teaser-eywa-lodge-todo-incluido.mp4, una línea en registro.csv y las líneas de aprendizajes.md. Si algo te bloquea, anótalo en el estado y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+El teaser de Eywa Lodge está listo y pasó la puerta C con 10/10. Quedó con 2 clips en vez de 3, porque la sala se descartó.
+
+- **Video:** `teasers/eywa-lodge-todo-incluido/teaser-eywa-lodge-todo-incluido.mp4`. Dura 12,1 s a 1920x1080 y 24 fps, con la pasarela como apertura. Mide −13,4 LUFS y −3,9 dBTP.
+- **Contenido:** pasarela y dormitorio, más un end card de 6 s, con `lodge-andino.mp3` y marca de agua DEMO diagonal al 10 %.
+- **Notas:**
+  - Puerta A: 10.
+  - Puerta B: pasarela 10 y dormitorio 10.
+  - Puerta C: 10.
+- **Descartado:** la sala (ORBIT 20°) sacó 5 de nota, y el reintento con AXIS LOCK, descripción y fotograma final también sacó 5. En ambos, la mecedora de primer plano o la mesa de vidrio se deformaron.
+- **Créditos:** gasté 24,2 contra los 36 aprobados (18 de los tres clips, 6 del reintento y 0,2 del upscale). El saldo inicial era 776,75.
+- **Registro:** `registro.csv` tiene la fila de Eywa Lodge y `aprendizajes.md` las líneas del clip y de la puerta C. La fila anota 1 reintento, aunque la sala tuvo un solo reintento sobre el clip original.
+- **Pendiente:**
+  - `presupuesto-corrida.json` marca 241,2 comprometidos y debería marcar cerca de 211. Parece que el historial duplica entradas "batch de 1 clips"; no lo revisé ni lo corregí.
+  - Este ffmpeg no tiene vidstab, así que el video no lleva estabilización.
+  - Si Enrique quiere el recorrido completo, la sala necesita otro tratamiento, porque la escalera de movimientos ya se agotó.

@@ -1,0 +1,33 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Port 8788 is in use, using port 8789 instead.
+  Starting Headroom proxy on port 8789...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8789.log
+  Proxy ready on http://127.0.0.1:8789
+  Dashboard:    http://127.0.0.1:8789/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8789'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8789 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8789
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Usa la skill automatico en modo teaser y DESATENDIDO (lee config-corrida.md; no hagas ninguna pregunta). Propiedad: Casa Nacho, Punta Sal - Perú (hoja 123, zona Punta Sal, personalidad musical playa-luminosa). Link: https://www.airbnb.com.pe/rooms/1203050830696236472. Auditoría previa, fotos a usar: 6 (piscina y casa), 20 (piscina), 33 (piscina 2), 18 (jardín con camastros), 19 (jardín y casa), 22 (jardín con hamaca), 45 (hamaca y terraza), 24 (playa con toldo), 8 (terraza techada), 9 (terraza lounge), 16 (comedor de terraza), 17 (comedor de terraza 2), 21 (terraza vista mar), 23 (terraza de juegos), 38 (comedor exterior), 39 (comedor exterior 2), 58 (futbolín), 26 (sala), 54 (sala 2), 27 (cocina), 55 (comedor interior), 30 (camarotes), 34 (camarotes 2), 67 (camarotes 3), 68 (dormitorio con sala), 74 (dormitorio). Notas: 74 fotos profesionales con dos sets (día y atardecer). Usar solo el de día. Pocos dormitorios principales en horizontal (69, 70 verticales).. Carpeta: teasers/casa-nacho-punta-sal/. Estado: estado-casa-nacho-punta-sal.md (créalo desde estado-PLANTILLA.md con calidad_kling: std y presupuesto_creditos: 36). Antes de generar, revisa con 'akarti.py identificar' si hay clips reutilizables en rescate-6oct/. Resultado: teasers/casa-nacho-punta-sal/teaser-casa-nacho-punta-sal.mp4, una línea en registro.csv y las líneas de aprendizajes.md. Si algo te bloquea, anótalo en el estado y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+Casa Nacho quedó detenida: no se puede generar porque Higgsfield pide autorización y esta sesión no es interactiva. No hay teaser en `teasers/casa-nacho-punta-sal/`, ni fila en `registro.csv`, ni líneas en `aprendizajes.md`, y no se gastaron créditos.
+
+Lo que sí quedó hecho:
+- **Estado:** `estado-casa-nacho-punta-sal.md` está creado con `calidad_kling: std` y `presupuesto_creditos: 36`. La parada está anotada ahí.
+- **Fotos:** se descargaron las 89 en `teasers/casa-nacho-punta-sal/fotos`.
+- **Clips reutilizables:** `akarti.py identificar` no encontró ninguna coincidencia con `rescate-6oct/`, así que hay que generar los 3 clips.
+
+La auditoría y la puerta A no se hicieron; `puerta_A_nota` sigue vacía.
+
+Para retomar:
+1. Autoriza Higgsfield con `/mcp` en una sesión interactiva.
+2. Vuelve a lanzar `/automatico casa-nacho-punta-sal teasers/casa-nacho-punta-sal/fotos teaser`. La corrida sigue desde la auditoría.
+
+Los servidores `premiere-pro` y `headroom` tampoco conectaron (tiempo de espera agotado). El render automático no usa Premiere, así que eso no frena nada.

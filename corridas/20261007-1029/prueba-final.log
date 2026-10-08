@@ -1,0 +1,36 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Starting Headroom proxy on port 8788...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8788.log
+  Proxy ready on http://127.0.0.1:8788
+  Dashboard:    http://127.0.0.1:8788/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8788'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8788 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8788
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Modo desatendido: no hagas preguntas. Haz la prueba descrita en estado-prueba-final.md siguiendo su prompt (calidad std, 12 créditos aprobados). Al terminar escribe la línea PRUEBA_TERMINADA al final del archivo y aplica la conclusión en .claude/skills/cocinando-lo-demas/SKILL.md.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+La prueba terminó. El final de 12 % arregla la geometría en los dos movimientos, pero quita casi todo el avance con profundidad.
+
+| Clip | Sin final | Con final |
+|---|---|---|
+| AXIS LOCK + descripción | 5/10. Aparecen listones bajo la litera, la cámara gira a la derecha y la velocidad es irregular. | 10/10 |
+| DOLLY | 5/10. Aparecen los mismos listones a los 3,5–4 s. | 10/10 |
+
+- **Geometría:** con final, la litera queda fiel a la foto en ambos movimientos.
+- **Movimiento:** los clips con final se parecen a un zoom de 12 % sin paralaje. DOLLY y AXIS LOCK salen casi iguales, y el control de DOLLY sí tenía avance con profundidad.
+- **Formato:** los clips con final salen a 1284×716 y los controles a 1280×716. Conviene revisarlo en el montaje.
+- **Gasto:** 12 créditos, en un solo batch y con una sola espera.
+- **Cómo se juzgó:** el juez rápido dejó los 4 clips en FRONTERA. Los volvió a juzgar el juez de Opus, y esas son las notas de la tabla.
+
+La instrucción solo preveía "mejora en los dos" o "empeora". Esta prueba salió mixta, y decidí dejar el final como red de seguridad. En `.claude/skills/cocinando-lo-demas/SKILL.md` la regla pasó de "En prueba" a "Confirmado con límite". Se usa solo en cuartos con camarotes, muebles altos o patrones que ya deformaron. En cuartos amplios, DOLLY y AXIS LOCK van sin final. Si prefieres confirmar la regla sin límite o quitarla, es un cambio de pocas líneas.
+
+En `aprendizajes.md` agregué 4 líneas, una por clip. En `estado-prueba-final.md` escribí la conclusión y la línea `PRUEBA_TERMINADA` al final. Los archivos de la prueba quedaron en `prueba/`.
+
+La primera vez, la guardia bloqueó el envío porque yo estaba parado en `prueba/` y no encontraba el estado. Volví a la raíz y pasó, sin gasto extra.

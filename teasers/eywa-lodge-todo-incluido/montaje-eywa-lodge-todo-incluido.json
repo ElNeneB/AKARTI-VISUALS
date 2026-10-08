@@ -1,0 +1,9 @@
+{"nombre":"Eywa Lodge teaser","fps":24,
+ "clips":[
+  {"archivo":"teasers/eywa-lodge-todo-incluido/clips/clip1_foto_16_1080p.mp4","in":0.1,"out":4.0,"espacio":"Pasarela techada"},
+  {"archivo":"teasers/eywa-lodge-todo-incluido/clips/clip3_foto_01_1080p.mp4","in":0.1,"out":4.0,"espacio":"Dormitorio"}],
+ "titulo":"teasers/eywa-lodge-todo-incluido/titulo.png",
+ "marca_agua":"assets/marca/marca-agua-16x9.png",
+ "end_card":{"archivo":"assets/marca/end-card-16x9.png","duracion":6},
+ "musica":{"archivo":"biblioteca/musica/lodge-andino.mp3","bpm":89.6,"primer_beat_s":0.02},
+ "room_tone":{"archivo":"biblioteca/room-tone/interior.wav","db":-22}}

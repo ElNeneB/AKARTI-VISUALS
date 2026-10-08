@@ -1,0 +1,19 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Starting Headroom proxy on port 8788...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8788.log
+  Proxy ready on http://127.0.0.1:8788
+  Dashboard:    http://127.0.0.1:8788/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8788'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8788 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8788
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Usa la skill automatico en modo teaser y DESATENDIDO (lee config-corrida.md; no hagas ninguna pregunta). Propiedad: Casa Killa fila 1 Punta Sal (hoja 148, zona Contralmirante Villar, personalidad musical playa-luminosa). Link: https://www.airbnb.com.pe/rooms/1297325934895873412. Auditoría previa, fotos a usar: 34 (fachada), 1 (sala), 3 (sala 2), 4 (sala con vista al mar), 6 (cocina con isla), 7 (cocina), 28 (terraza), 30 (terraza lounge), 32 (terraza 2), 29 (comedor exterior), 26 (piscina), 40 (piscina 2), 41 (piscina con camastros), 35 (playa con toldos), 9 (dormitorio principal), 10 (dormitorio principal 2), 12 (dormitorio 2), 14 (dormitorio vista mar), 16 (camarote), 17 (camarote 2). Notas: 44 fotos. Varias fotos interiores tienen look de retoque con IA (el título lo dice). Muchas fotos vienen del anuncio 848640381870852870 (también pendiente en esta lista) y probablemente del de "2 Casas Killa juntas" (1550206809441289022): revisar que no se haga el mismo recorrido dos veces.. Carpeta: teasers/casa-killa-fila-1/. Estado: estado-casa-killa-fila-1.md (créalo desde estado-PLANTILLA.md con calidad_kling: std y presupuesto_creditos: 36). Antes de generar, revisa con 'akarti.py identificar' si hay clips reutilizables en rescate-6oct/. Resultado: teasers/casa-killa-fila-1/teaser-casa-killa-fila-1.mp4, una línea en registro.csv y las líneas de aprendizajes.md. Si algo te bloquea, anótalo en el estado y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+You've hit your session limit · resets 1:30am (America/Lima)

@@ -1,0 +1,29 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Starting Headroom proxy on port 8788...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8788.log
+  Proxy ready on http://127.0.0.1:8788
+  Dashboard:    http://127.0.0.1:8788/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8788'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8788 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8788
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Usa la skill automatico en modo teaser y DESATENDIDO (lee config-corrida.md; no hagas ninguna pregunta). Propiedad: Casa Killa Luxury Punta Sal (hoja 155, zona Punta Sal, personalidad musical playa-luminosa). Link: https://www.airbnb.com.pe/rooms/848640381870852870. Auditoría previa, fotos a usar: 37 (fachada), 1 (sala), 2 (sala 2), 3 (sala con vista al mar), 5 (sala-terraza vista mar), 6 (cocina con isla), 8 (cocina), 9 (barra de cocina), 29 (terraza), 35 (terraza lounge), 31 (comedor exterior), 28 (piscina), 33 (piscina con terraza), 42 (piscina con camastros), 43 (piscina 2), 38 (playa con toldos), 10 (dormitorio vista mar), 11 (dormitorio 2), 13 (dormitorio principal), 14 (dormitorio principal 2), 16 (camarote), 17 (camarote 2). Notas: 45 fotos. Es la MISMA casa que "Casa Killa fila 1" (1297325934895873412): comparten la mayoría de archivos. Hacer un solo recorrido para ambas.. Carpeta: teasers/casa-killa-luxury-punta/. Estado: estado-casa-killa-luxury-punta.md (créalo desde estado-PLANTILLA.md con calidad_kling: std y presupuesto_creditos: 36). Antes de generar, revisa con 'akarti.py identificar' si hay clips reutilizables en rescate-6oct/. Resultado: teasers/casa-killa-luxury-punta/teaser-casa-killa-luxury-punta.mp4, una línea en registro.csv y las líneas de aprendizajes.md. Si algo te bloquea, anótalo en el estado y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+Background tasks still running 10m after the last turn (subagent "Auditoría y puerta A"); stopping them. Set CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS=0 to wait indefinitely.
+La corrida de Casa Killa Luxury Punta Sal avanza, pero todavía no hay teaser.
+
+Hecho hasta ahora:
+- **Estado:** creé `estado-casa-killa-luxury-punta.md` con calidad std y presupuesto de 36 créditos.
+- **Fotos:** descargué 60 del anuncio, no las 45 de la auditoría previa. Por eso los números de foto de esa auditoría pueden no coincidir con los de la descarga.
+- **Clips reutilizables:** `akarti.py identificar` no encontró ninguna foto que coincida con `rescate-6oct/`, así que hay que generar los 3 clips.
+- **Higgsfield:** está conectado y el saldo es de 734,35 créditos.
+- **Auditoría:** el agente `akarti-auditor` está revisando las fotos para elegir los 3 espacios y calcular la nota de la puerta A. Espero su aviso.
+
+Siguen la generación, los jueces, el render, la fila en `registro.csv` y las líneas de `aprendizajes.md`. Todavía no se gastó ningún crédito.

@@ -1,0 +1,34 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Starting Headroom proxy on port 8788...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8788.log
+  Proxy ready on http://127.0.0.1:8788
+  Dashboard:    http://127.0.0.1:8788/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8788'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8788 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8788
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Usa la skill automatico en modo teaser y DESATENDIDO (lee config-corrida.md; no hagas ninguna pregunta). Propiedad: Casa Tiempo, Las Pocitas, Máncora (hoja 189, zona Máncora, personalidad musical playa-luminosa). Link: https://www.airbnb.com.pe/rooms/795663543835163928. Auditoría previa, fotos a usar: 32 (fachada con piscina), 31 (piscina vista mar), 50 (piscina 2), 51 (terraza de piscina), 44 (terraza con sombrillas), 52 (playa con sombrillas), 40 (balcón vista mar), 42 (terraza de dormitorio), 37 (jardín interior con escalera), 1 (sala vista mar), 2 (sala principal), 4 (sala 2), 8 (sala de TV), 11 (sala 3), 12 (cocina), 13 (cocina 2), 14 (comedor), 17 (comedor y jardín), 18 (dormitorio principal), 19 (dormitorio vista mar), 21 (dormitorio 3), 22 (camarotes), 24 (dormitorio 4), 38 (dormitorio con terraza). Notas: 54 fotos profesionales con gran angular, set de día muy completo.. Carpeta: teasers/casa-tiempo-las-pocitas/. Estado: estado-casa-tiempo-las-pocitas.md (créalo desde estado-PLANTILLA.md con calidad_kling: std y presupuesto_creditos: 36). Antes de generar, revisa con 'akarti.py identificar' si hay clips reutilizables en rescate-6oct/. Resultado: teasers/casa-tiempo-las-pocitas/teaser-casa-tiempo-las-pocitas.mp4, una línea en registro.csv y las líneas de aprendizajes.md. Si algo te bloquea, anótalo en el estado y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+La corrida de Casa Tiempo se detuvo en la generación. No hay clips ni video final, y no se gastaron créditos.
+
+- **Bloqueo:** Higgsfield no está autorizado en esta sesión y no puedo hacer el OAuth sin interacción. Lo anoté en `estado-casa-tiempo-las-pocitas.md`, en "Pendientes / reintentos".
+- **Para retomar:** autoriza Higgsfield desde `/mcp` en una sesión interactiva, o desde los conectores de claude.ai. Luego relanza `/automatico casa-tiempo-las-pocitas teaser` y sigue desde la fase 2.
+- **Clips reutilizables:** `akarti.py identificar` no encontró ninguno en `rescate-6oct/`. Hay que generar los 3 clips.
+- **Fotos y estado:** descargué 69 fotos en `teasers/casa-tiempo-las-pocitas/fotos`. Creé el estado con calidad std y presupuesto 36.
+- **Puerta A:** 10/10, con el teaser planeado en 3 clips. Cuestan 18 créditos, dentro del presupuesto de 36.
+
+| # | Foto | Espacio | Movimiento | Fotograma final |
+|---|---|---|---|---|
+| 1 (apertura) | 17 | Sala techada con el mar al fondo | DOLLY | Sí |
+| 2 | 08 | Estar interior | ORBIT 20° | No |
+| 3 | 50 | Balcón del dormitorio principal, vista al mar | AXIS LOCK + descripción del espacio | Sí |
+
+- **Numeración de fotos:** la de tu lista de candidatas no coincide con la galería real. Por ejemplo, la 31 y la 32 son camarotes, y la 2, 11, 12 y 13 son logo, íconos y avatar. El auditor verificó por contenido y la Lista definitiva usa la numeración real.
+- **Sin escribir todavía:** `registro.csv` y `aprendizajes.md` no tienen líneas de esta corrida.

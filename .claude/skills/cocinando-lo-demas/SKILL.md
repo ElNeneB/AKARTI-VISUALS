@@ -39,10 +39,16 @@ Elegir desde el primer intento la versión que se sabe que aguanta, en vez de es
 
 ## Fotograma final (DOLLY y AXIS LOCK)
 
-Kling 3.0 acepta una imagen de inicio y una final por el mismo precio. En DOLLY y AXIS LOCK se pasa como final un recorte centrado de la **misma** foto, un 12 % más cerrado (`python3 herramientas/akarti.py final-push FOTO_169.jpg FINAL.jpg 12`). Así Kling solo interpola un avance entre dos imágenes reales y la geometría queda anclada. Marcar "Sí" en la columna Final.
+Kling 3.0 acepta una imagen de inicio y una final por el mismo precio. Se pasa como final un recorte centrado de la **misma** foto, un 12 % más cerrado (`python3 herramientas/akarti.py final-push FOTO_169.jpg FINAL.jpg 12`). Así Kling solo interpola un avance entre dos imágenes reales y la geometría queda anclada. Marcar "Sí" en la columna Final.
+
+**Confirmado con límite (prueba del 7/10, camarote, 12 créditos):** con final, DOLLY y AXIS LOCK pasaron de 5/10 a 10/10 (sin final, aparecían listones bajo la litera), pero el movimiento queda casi un zoom de 12 % sin paralaje y los dos salen casi iguales. Por eso:
+
+- **Usar final solo en cuartos con camarotes, muebles altos o patrones que ya deformaron** (la red de seguridad).
+- En cuartos amplios y sin riesgo, DOLLY y AXIS LOCK van sin final para conservar el avance con profundidad.
+- Los clips con final salen a 1284x716: revisar en el montaje.
 
 - En ORBIT y CRANE va sin final, porque la vista cambia de lado o de altura y un recorte no la representa.
-- **En prueba desde el 6/10:** el juez anota en `aprendizajes.md` cada clip con final. Si un DOLLY o AXIS LOCK con final deforma o queda sin movimiento, el reintento se hace sin final (o con 8 %), y se anota.
+- El juez anota en `aprendizajes.md` cada clip con final. Si un DOLLY o AXIS LOCK con final deforma o queda sin movimiento, el reintento se hace sin final (o con 8 %), y se anota.
 
 ## Prompts de cámara
 

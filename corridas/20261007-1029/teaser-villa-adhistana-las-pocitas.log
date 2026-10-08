@@ -1,0 +1,35 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Starting Headroom proxy on port 8788...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8788.log
+  Proxy ready on http://127.0.0.1:8788
+  Dashboard:    http://127.0.0.1:8788/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8788'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8788 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8788
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Usa la skill automatico en modo teaser y DESATENDIDO (lee config-corrida.md; no hagas ninguna pregunta). Propiedad: Villa Adhistana, Las Pocitas, Máncora, Perú (hoja 183, zona Máncora, personalidad musical playa-luminosa). Link: https://www.airbnb.com.pe/rooms/15531393. Auditoría previa, fotos a usar: 46 (jardín), 38 (patio), 42 (gazebo), 49 (jardín con vista), 56 (piscina infinita), 57 (piscina con bar), 58 (piscina), 65 (piscina 2), 1 (terraza vista mar), 3 (terraza lounge), 23 (terraza), 24 (terraza 2), 26 (terraza 3), 52 (terraza con cama de día), 4 (sala), 10 (sala 2), 22 (sala de TV), 6 (comedor y cocina), 7 (cocina), 8 (comedor), 11 (dormitorio con dosel), 12 (dormitorio principal), 13 (dormitorio 3), 16 (dormitorio 4), 29 (dormitorio rosa). Notas: 66 fotos con HDR muy saturado y gran angular, pero uniforme en todo el set. Revisar distorsión en las tomas de techo de paja antes de generar.. Carpeta: teasers/villa-adhistana-las-pocitas/. Estado: estado-villa-adhistana-las-pocitas.md (créalo desde estado-PLANTILLA.md con calidad_kling: std y presupuesto_creditos: 36). Antes de generar, revisa con 'akarti.py identificar' si hay clips reutilizables en rescate-6oct/. Resultado: teasers/villa-adhistana-las-pocitas/teaser-villa-adhistana-las-pocitas.mp4, una línea en registro.csv y las líneas de aprendizajes.md. Si algo te bloquea, anótalo en el estado y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+El teaser de Villa Adhistana está hecho, pero salió sin música y la puerta C le dio 8/10, así que no pasa.
+
+- **Video:** `teasers/villa-adhistana-las-pocitas/teaser-villa-adhistana-las-pocitas.mp4`, de 15,5 s. Tiene título, los 3 clips en 1080p, el end card, la marca de agua y room tone de mar.
+- **Puerta A:** 10/10.
+- **Puerta B:** 10/10 en los tres clips, confirmado por el juez Opus.
+- **Puerta C:** 8/10. Falla el criterio 4, que los cortes caigan en beat, y el 7, el volumen: mide −27,5 LUFS contra el rango de −15 a −13. Las dos fallas vienen de que no hay música.
+- **Clips (foto):** piscina infinita (foto_63), cocina-comedor (foto_19) y dormitorio con dosel (foto_26). No descarté ninguno y no hubo reintentos. No encontré clips reutilizables en `rescate-6oct`.
+- **Créditos:** 18,3 gastados de los 36 aprobados. Son 18 de los clips y 0,3 del upscale. El saldo inicial era 752,59 y el final 734,35.
+- **Registro:** una línea en `registro.csv` y las líneas de cada puerta en `aprendizajes.md`.
+
+**Pendiente:**
+- Falta la pista `playa-luminosa`: Gemini no la entregó (ver `biblioteca/musica/PENDIENTE.md`). Cuando exista, hay que agregar `musica` a `montaje-villa-adhistana-las-pocitas.json` y volver a correr `akarti.py render`. No gasta créditos.
+- El juez también recomienda subir el contraste del título, porque el texto fino casi no se lee sobre las tumbonas crema.
+
+**Fotos y Higgsfield:**
+- La numeración de la auditoría previa (66 fotos) no coincide con la galería de 80 archivos. Usé los números reales de los archivos.
+- El conector `higgsfield` sigue sin autorizar. Generé por el conector de claude.ai, que sí está disponible.

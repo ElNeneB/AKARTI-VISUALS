@@ -1,0 +1,30 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Port 8788 is in use, using port 8789 instead.
+  Starting Headroom proxy on port 8789...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8789.log
+  Proxy ready on http://127.0.0.1:8789
+  Dashboard:    http://127.0.0.1:8789/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8789'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8789 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8789
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet --chrome Modo desatendido: no hagas preguntas. Con Claude in Chrome abre gemini.google.com (Enrique ya inició sesión) y genera la pista 'campo-calido' con el prompt exacto de biblioteca/musica/prompts-gemini.md (sección campo-calido). Descarga el audio, muévelo a biblioteca/musica/campo-calido.mp3 (o la extensión que dé Gemini), mide con 'python3 herramientas/akarti.py bpm' y agrega la fila a biblioteca/musica/indice.csv (archivo,personalidad,bpm,primer_beat_s,duracion_s,licencia=Gemini). Si Gemini no permite crear o descargar música, escribe el motivo en biblioteca/musica/PENDIENTE.md y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+La pista `campo-calido` ya está generada, descargada y registrada en el índice.
+
+- **Generación:** usé el prompt exacto de `campo-calido` en Gemini ("Create music"). Tardó unos 4 minutos.
+- **Archivo:** descargué el MP3 y lo moví a `biblioteca/musica/campo-calido.mp3`.
+- **Medición:** `akarti.py bpm` dio 97.3 BPM (el prompt pedía 96) y primer beat en 0.52 s.
+- **Duración:** 62.38 s (el prompt pedía 60). La medí con `ffprobe`.
+- **Índice:** agregué esta fila a `biblioteca/musica/indice.csv`: `campo-calido.mp3,cálida / rústica,97.3,0.52,62.380333,Gemini`.
+
+No escribí nada en `PENDIENTE.md`, porque Gemini sí permitió crear y descargar. Ese archivo sigue con la nota de `playa-luminosa`, que no se resolvió.
+
+La pestaña de Chrome sigue abierta en el chat de Gemini.

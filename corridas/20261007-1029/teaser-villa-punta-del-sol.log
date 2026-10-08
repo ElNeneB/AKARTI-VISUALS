@@ -1,0 +1,19 @@
+
+  ╔═══════════════════════════════════════════════╗
+  ║            HEADROOM WRAP: CLAUDE              ║
+  ╚═══════════════════════════════════════════════╝
+
+  Starting Headroom proxy on port 8788...
+  Logs: /Users/joaannesalgado/.headroom/logs/proxy-8788.log
+  Proxy ready on http://127.0.0.1:8788
+  Dashboard:    http://127.0.0.1:8788/dashboard
+  MCP retrieve tool: existing config differs (env {} -> {'HEADROOM_PROXY_URL': 'http://127.0.0.1:8788'}). To update: headroom mcp install --proxy-url http://127.0.0.1:8788 --force
+
+  Launching Claude Code (API routed through Headroom)...
+  ANTHROPIC_BASE_URL=http://127.0.0.1:8788
+  Remote Control: Claude Code 2.1.292 disables the /remote-control (/rc) command while ANTHROPIC_BASE_URL points at a custom endpoint (the wrapped Claude session's ANTHROPIC_BASE_URL). Headroom cannot override this client-side gate — run Claude without Headroom for sessions that need Remote Control.
+  Same base-URL gate also affects on-demand tool loading (#746 — Headroom keeps it on for this session) and the 1M context window (#1158 — restore with `headroom wrap claude --1m`).
+  Extra args: -p --dangerously-skip-permissions --model sonnet Usa la skill automatico en modo teaser y DESATENDIDO (lee config-corrida.md; no hagas ninguna pregunta). Propiedad: Villa Punta del Sol con Piscina y Playa (hoja 162, zona Punta Negra, personalidad musical playa-luminosa). Link: https://www.airbnb.com.pe/rooms/14897663. Auditoría previa, fotos a usar: 53 (fachada con piscina), 54 (piscina), 55 (terraza de piscina), 62 (piscina vista mar), 37 (terrazas exteriores), 39 (terraza vista mar), 40 (terraza 2), 20 (balcón), 27 (patio con escalera), 48 (terraza de roca con parrilla), 1 (sala), 3 (sala con chimenea), 4 (comedor vista mar), 5 (comedor 2), 10 (sala-comedor), 6 (cocina), 7 (cocina 2), 21 (sala de dormitorio/kitchenette), 11 (dormitorio principal), 12 (dormitorio azul), 16 (dormitorio 3), 18 (dormitorio con camarote), 23 (dormitorio 5). Notas: 65 fotos profesionales con gran angular fuerte (revisar distorsión) y cielo nublado uniforme.. Carpeta: teasers/villa-punta-del-sol/. Estado: estado-villa-punta-del-sol.md (créalo desde estado-PLANTILLA.md con calidad_kling: std y presupuesto_creditos: 36). Antes de generar, revisa con 'akarti.py identificar' si hay clips reutilizables en rescate-6oct/. Resultado: teasers/villa-punta-del-sol/teaser-villa-punta-del-sol.mp4, una línea en registro.csv y las líneas de aprendizajes.md. Si algo te bloquea, anótalo en el estado y termina.
+
+  ENABLE_TOOL_SEARCH=true (on-demand tool loading kept on; issue #746)
+You've hit your session limit · resets 1:30am (America/Lima)

@@ -1,0 +1,8 @@
+{"nombre":"ALU Luxe teaser","fps":24,
+ "clips":[
+  {"archivo":"teasers/alu-luxe-duo-de/clips/clip1_foto_14_1080p.mp4","in":0.1,"out":4.0,"espacio":"Sala"},
+  {"archivo":"teasers/alu-luxe-duo-de/clips/clip3_foto_43_1080p.mp4","in":0.1,"out":4.0,"espacio":"Dormitorio principal"}],
+ "titulo":"teasers/alu-luxe-duo-de/titulo.png",
+ "marca_agua":"assets/marca/marca-agua-16x9.png",
+ "end_card":{"archivo":"assets/marca/end-card-16x9.png","duracion":4.5},
+ "room_tone":{"archivo":"biblioteca/room-tone/interior.wav","db":-22}}
