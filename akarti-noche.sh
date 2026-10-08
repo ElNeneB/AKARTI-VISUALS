@@ -80,12 +80,20 @@ else
   echo "Aviso: no encontré Headroom; la corrida usa Claude directo (sin compresión extra)."
 fi
 claude --help 2>/dev/null | grep -q -- "--chrome" && CHROME="--chrome" || CHROME=""
+esperar_internet() {  # no gastar pasos mientras el Mac no tenga conexión
+  local n=0
+  until curl -s -m 10 -o /dev/null https://api.anthropic.com; do
+    [ $n -eq 0 ] && decir "  ⏸ Sin internet. Espero a que vuelva la conexión…"
+    n=$((n+1)); sleep 60
+  done
+}
 paso() {  # paso NOMBRE [--chrome] "PROMPT"
   local nombre="$1"; shift
   if [ "$1" = "--chrome" ]; then shift; [ -n "$CHROME" ] && set -- "$CHROME" "$@"; fi
   decir "▶ $nombre"
   local intento codigo
   for intento in 1 2 3 4 5 6 7 8 9 10 11 12; do
+    esperar_internet
     # < /dev/null: que Claude no se coma la cola de propiedades del bucle
     "${CLAUDE[@]}" "$@" < /dev/null > "$CORRIDA/$nombre.log" 2>&1
     codigo=$?
@@ -93,6 +101,11 @@ paso() {  # paso NOMBRE [--chrome] "PROMPT"
     if grep -qiE "usage limit|limit reached|rate.?limit|resets? (at|in)|overloaded" "$CORRIDA/$nombre.log"; then
       decir "  ⏸ $nombre: límite de uso de Claude. Espero 30 min y reintento ($intento/12)."
       sleep 1800
+      continue
+    fi
+    if grep -qiE "API Error: 5[0-9][0-9]|connection_error|Failed to connect|nodename nor servname|ENOTFOUND|ECONNREFUSED" "$CORRIDA/$nombre.log"; then
+      decir "  ⏸ $nombre: se cortó la conexión. Espero 5 min y reintento ($intento/12)."
+      sleep 300
       continue
     fi
     break
@@ -135,10 +148,6 @@ done < "$CORRIDA/cola.txt"
 
 # ---------------------------------------------------------------- 3. cierre
 python3 herramientas/corrida.py resumen | tee -a "$RESUMEN"
-for f in estado-*.md aprendizajes.md registro.csv rescate-6oct.md biblioteca/musica/indice.csv \
-         biblioteca/musica/PENDIENTE.md presupuesto-corrida.json corridas teasers .claude/skills; do
-  [ -e "$f" ] && git add -A -- "$f" 2>/dev/null
-done
-git commit -qm "Corrida desatendida $(date +%Y-%m-%d): estados, registro y aprendizajes" 2>/dev/null && \
-  git push -q origin "$RAMA" 2>/dev/null && decir "Resultados de texto subidos a la rama $RAMA."
+# Sin subir nada a GitHub: la Mac no tiene permiso de escritura y pediría usuario y contraseña.
+# Los registros quedan en corridas/ y el resumen en este mismo archivo.
 decir "Fin. Teasers en teasers/<propiedad>/ · resumen en $RESUMEN"

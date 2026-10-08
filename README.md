@@ -46,6 +46,7 @@ Pregunta 3 cosas al inicio (tope de créditos, permisos, Mac listo) y después c
 | `registro.csv` | Costo real por video (se crea en la primera corrida) |
 | `estado-prueba-final.md` | Prueba pendiente del fotograma final (12 créditos) |
 | `akarti-noche.sh` | La corrida desatendida |
+| `akarti-premiere.sh` | 5 teasers editados en Premiere por MCP (Amantica, MYKITA, Casablanca, Kassa Sunna, Kailani) y la hoja de Drive en verde |
 | `config-corrida.md` | Respuestas fijas de la corrida (calidad, tope, marca, render) |
 | `propiedades-teaser.csv` | Las 50 propiedades que pasaron la auditoría |
 | `rescate-6oct.md` | Los 15 clips del 6/10 para reutilizar |

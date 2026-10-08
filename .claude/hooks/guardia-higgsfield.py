@@ -63,6 +63,9 @@ def costo_clip(p):
     return COSTO_SEGUNDO.get(str(p.get("mode", "std")), 3.0) * int(p.get("duration", 5))
 
 
+ID_LLAMADA = None  # tool_use_id de la llamada actual (para no cobrar dos veces)
+
+
 def cobrar(cwd, costo, detalle):
     """Suma el costo a presupuesto-corrida.json o niega si se pasa del tope."""
     ruta = os.path.join(os.environ.get("CLAUDE_PROJECT_DIR", cwd), "presupuesto-corrida.json")
@@ -70,12 +73,14 @@ def cobrar(cwd, costo, detalle):
         return
     with open(ruta, encoding="utf-8") as f:
         p = json.load(f)
+    if ID_LLAMADA and any(h.get("id") == ID_LLAMADA for h in p.get("historial", [])):
+        return  # el hook corrió dos veces para la misma llamada: ya está cobrada
     if p["comprometido"] + costo > p["tope"]:
         negar(f"Tope de la corrida: van {p['comprometido']:.2f} de {p['tope']} créditos y este "
               f"envío ({detalle}) cuesta {costo:.2f}. No se envía. Termina lo que esté a medias "
               "sin generar más y reporta.")
     p["comprometido"] = round(p["comprometido"] + costo, 2)
-    p.setdefault("historial", []).append({"detalle": detalle, "creditos": costo})
+    p.setdefault("historial", []).append({"detalle": detalle, "creditos": costo, "id": ID_LLAMADA})
     with open(ruta, "w", encoding="utf-8") as f:
         json.dump(p, f, ensure_ascii=False, indent=1)
 
@@ -96,7 +101,9 @@ def revisar_estado(cwd):
 
 
 def main():
+    global ID_LLAMADA
     d = json.load(sys.stdin)
+    ID_LLAMADA = d.get("tool_use_id")
     herramienta = d.get("tool_name", "").split("__")[-1]
     entrada = d.get("tool_input", {})
     if herramienta == "show_generations":
