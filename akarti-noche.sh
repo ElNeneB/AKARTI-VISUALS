@@ -135,10 +135,6 @@ done < "$CORRIDA/cola.txt"
 
 # ---------------------------------------------------------------- 3. cierre
 python3 herramientas/corrida.py resumen | tee -a "$RESUMEN"
-for f in estado-*.md aprendizajes.md registro.csv rescate-6oct.md biblioteca/musica/indice.csv \
-         biblioteca/musica/PENDIENTE.md presupuesto-corrida.json corridas teasers .claude/skills; do
-  [ -e "$f" ] && git add -A -- "$f" 2>/dev/null
-done
-git commit -qm "Corrida desatendida $(date +%Y-%m-%d): estados, registro y aprendizajes" 2>/dev/null && \
-  git push -q origin "$RAMA" 2>/dev/null && decir "Resultados de texto subidos a la rama $RAMA."
+# Sin subir nada a GitHub: la Mac no tiene permiso de escritura y pediría usuario y contraseña.
+# Los registros quedan en corridas/ y el resumen en este mismo archivo.
 decir "Fin. Teasers en teasers/<propiedad>/ · resumen en $RESUMEN"
