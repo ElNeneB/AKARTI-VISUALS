@@ -31,7 +31,8 @@ La imagen debe verse como si la cámara estuviera montada sobre un riel o una gr
 - Apertura: el plano más impactante de la propiedad en los primeros 3 segundos.
 - Recorrido lógico: entrada o exterior → sala → comedor → cocina → dormitorios → baños → terraza o piscina.
 - Cierre: el segundo plano más fuerte (o el hero) y luego el end card.
-- Nunca dos clips consecutivos con el mismo movimiento de cámara (Dolly, Orbit, Axis Lock, Crane) ni con el mismo tipo de espacio.
+- Nunca dos clips consecutivos de la misma familia de movimiento ni con el mismo tipo de espacio. Familias: Avance (Dolly y Axis Lock, que en pantalla se ven igual), Lateral (Orbit) y Vertical (Crane); las reglas completas de ritmo están en `cocinando-lo-demas`. Si el montaje tiene dos Orbit, van en sentidos opuestos (izq→der y der→izq).
+- Si al cortar sobre la música o al descartar un clip queda una repetición de familia, primero se intercambian clips de posición sin romper el recorrido lógico; si no se puede, se avisa a Enrique en una línea con el clip que habría que regenerar y el movimiento sugerido. Nunca se entrega un teaser con la repetición.
 - El montaje se corta sobre la música: define el BPM y ubica cada corte en un tiempo fuerte. Referencia: a 120 BPM, un compás de 4/4 dura 2 s. Varía la duración útil de los clips en múltiplos del beat para evitar un ritmo de metrónomo.
 
 ## IMAGEN Y COLOR

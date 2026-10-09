@@ -20,8 +20,8 @@ Se usa en tres puertas del flujo: después de armar la Lista definitiva (puerta 
 2. Cada foto descartada tiene su motivo, tomado de los criterios de `cocinando-lo-demas`.
 3. **(crítico)** Ninguna foto que sigue en la lista cae en un criterio de descarte.
 4. **(crítico)** Un clip = una habitación; ningún clip plantea una transición entre cuartos.
-5. Solo se usan DOLLY, ORBIT, AXIS LOCK o CRANE, con el prompt tal cual está en `cocinando-lo-demas`.
-6. Nunca hay dos clips seguidos con el mismo movimiento de cámara (el orden de los espacios lo manda el criterio 7).
+5. Solo se usan DOLLY, ORBIT, AXIS LOCK o CRANE, con el prompt tal cual está en `cocinando-lo-demas` (la variante de sentido del ORBIT cuenta como válida).
+6. **(crítico)** La línea "Secuencia de movimientos" cumple las reglas de ritmo de `cocinando-lo-demas`: nunca dos clips seguidos de la misma familia (DOLLY y AXIS LOCK son la misma familia, Avance), ningún movimiento en más de la mitad de los clips (excepción de teaser de 3 clips con dos ORBIT opuestos), al menos 3 movimientos distintos si hay 4 clips o más, dos ORBIT en sentidos opuestos y apertura sin DOLLY. Una "excepción por inicio seguro" escrita junto a la línea se acepta. Si la línea no está, cuenta como fallo (el orden de los espacios lo manda el criterio 7).
 7. El orden sigue el recorrido lógico: entrada o exterior → sala → comedor → cocina → dormitorios → baños → terraza o piscina.
 8. Cada movimiento tiene una línea que justifica por qué sirve para ese espacio.
 9. Las fotos verticales están marcadas con "Sí" en Recorte 16:9.
@@ -74,6 +74,7 @@ Cada reintento gasta créditos, así que antes de repetir se confirma que queda 
 - ORBIT con deformación de patrones o muebles: arco 45° → 30° → 20°.
 - DOLLY, AXIS LOCK o CRANE con geometría deformada: reintento 1 cambia a AXIS LOCK; reintento 2 agrega al inicio del prompt una descripción breve de la habitación real (materiales, muebles principales, ventanas), porque describir el cuarto ancla la escena.
 - Movimiento nulo o equivocado: reintento 1 reescribe la parte de cámara describiendo la traslación física (riel, columna); reintento 2 cambia a AXIS LOCK.
+- Antes de cambiar a AXIS LOCK, revisar los clips vecinos en la Secuencia de movimientos. Si algún vecino es de la familia Avance (DOLLY o AXIS LOCK), el cambio usa ORBIT a 20° en vez de AXIS LOCK, para no romper el ritmo. Todo cambio de movimiento actualiza la Secuencia de movimientos.
 - Todo en positivo: nunca agregar negaciones al prompt para "corregir" (Kling 3.0 no tiene negative prompt).
 
 ### Reintentos en puertas A y C

@@ -23,9 +23,48 @@ Descartar por criterio propio, sin pedir permiso, e informar después qué se qu
 
 1. **Primero, el veredicto:** decir si el set sirve o no para un recorrido.
 2. **Si sirve:** listar las fotos descartadas, cada una con su motivo.
-3. **Después, la tabla "Lista definitiva"** con estas columnas: #, Foto (ID), Espacio, Prompt (DOLLY / ORBIT / AXIS LOCK / CRANE), Recorte 16:9 (Sí / —), Final (Sí / —).
+3. **Después, la tabla "Lista definitiva"** con estas columnas: #, Foto (ID), Espacio, Prompt (DOLLY / ORBIT / AXIS LOCK / CRANE, con arco y sentido si es ORBIT), Familia (Avance / Lateral / Vertical), Por qué este movimiento (una línea), Recorte 16:9 (Sí / —), Final (Sí / —).
+4. **Debajo de la tabla, la línea "Secuencia de movimientos"** con el orden de los clips, por ejemplo: `ORBIT 30° izq→der · AXIS LOCK · ORBIT 30° der→izq · DOLLY`. Antes de entregar, revisarla contra las reglas de ritmo de abajo. Si alguna falla, se corrige la tabla antes de entregarla.
 
 Un clip = una habitación. Nunca planear una transición continua entre cuartos (la IA derrite las paredes).
+
+## Ritmo de movimientos (regla obligatoria en teasers y videos)
+
+Un video donde todos los clips se mueven igual se siente automático y delata la IA. El movimiento se elige por espacio, pero el conjunto tiene que alternar.
+
+### Las tres familias
+
+Para el ojo del espectador, lo que cuenta es hacia dónde viaja la cámara, no el nombre del prompt. DOLLY y AXIS LOCK avanzan los dos hacia adelante: son la misma familia y en pantalla se ven como el mismo movimiento.
+
+| Familia | Movimiento | Qué siente el espectador | Mejor en | Evitar en |
+|---|---|---|---|---|
+| Avance | AXIS LOCK | Entrar al espacio, profundidad, recorrido | Salas o terrazas largas, pasillos, cocinas lineales, cualquier cuarto con un punto de fuga claro al fondo (ventana, vista) | Cuartos chicos con una pared cerca: no hay hacia dónde avanzar |
+| Avance (pausa) | DOLLY | Respiro, casi quieto, contemplar | Dormitorios, baños, detalles con espacio, el plano antes del end card | La apertura: en los primeros 3 s se siente estático |
+| Lateral | ORBIT | Volumen y paralaje: el espacio "se abre" alrededor de un objeto | Sala con sofá o mesa central, comedor, cama, piscina o jacuzzi | Espacios sin objeto central; con patrones repetidos bajar el arco (30° → 20°) |
+| Vertical | CRANE | Revelación y escala: aparecen techo, vigas, altura | Techos altos con vigas, doble altura, fachadas | Techos bajos o planos. Aún sin validar: máximo 1 por video |
+
+### Reglas
+
+1. **Nunca dos clips seguidos de la misma familia.** DOLLY seguido de AXIS LOCK (o al revés) es una repetición.
+2. **Ningún movimiento ocupa más de la mitad de los clips.** En un video de 4 clips, máximo 2 de cada uno. Excepción: en un teaser de 3 clips (el formato del modo automático) se permiten 2 ORBIT solo si van en sentidos opuestos y con otro movimiento en medio.
+3. **Teaser o video de 4 clips o más: usar al menos 3 movimientos distintos** y las dos familias validadas (Avance y Lateral).
+4. **Dos ORBIT en el mismo video van en sentidos opuestos.** El primero de izquierda a derecha; el siguiente de derecha a izquierda (variante abajo). Si hay un tercero, vuelve a izquierda a derecha con otro arco.
+5. **La apertura nunca es DOLLY.** El primer clip lleva ORBIT o AXIS LOCK, que son los que tienen energía.
+6. **El orden de los espacios no se cambia para cumplir el ritmo** (lo manda el recorrido lógico). Se cambia el movimiento del clip que rompe la regla, eligiendo el segundo movimiento que mejor le sirve a ese espacio según la tabla.
+7. **Si un reintento del juez cambia el movimiento de un clip**, volver a revisar la Secuencia de movimientos con sus vecinos. Si el cambio crea una repetición de familia, el reintento usa ORBIT a 20° en vez de AXIS LOCK.
+
+### Patrón base para empezar
+
+Alternar Lateral y Avance, y dejar DOLLY como pausa (en los clips de Avance con final, el movimiento sale casi un zoom de 12 %: otra razón para no usar final donde no hace falta):
+
+- 3 clips (teaser): ORBIT 30° izq→der · AXIS LOCK · ORBIT 30° der→izq. Alternativa si el espacio del medio no sirve para AXIS LOCK: AXIS LOCK · ORBIT 30° · DOLLY
+- 4 clips: ORBIT 30° izq→der · AXIS LOCK · ORBIT 30° der→izq · DOLLY
+- 5 clips: AXIS LOCK · ORBIT 30° izq→der · DOLLY · ORBIT 30° der→izq · AXIS LOCK
+- 6 clips con techo alto: ORBIT 30° izq→der · AXIS LOCK · CRANE · ORBIT 30° der→izq · DOLLY · ORBIT 20° izq→der
+
+8. **Inicio seguro y ritmo conviven.** El "Inicio seguro" decide el arco (ORBIT 20°) y la descripción del cuarto; el ritmo decide la familia. Si un cuarto chico obliga a AXIS LOCK + descripción y su vecino también es de la familia Avance, primero se cambia el movimiento del vecino. Si el vecino no admite otro movimiento, se deja y se escribe "excepción por inicio seguro" junto a la Secuencia de movimientos; el juez la acepta con esa nota.
+
+El patrón es un punto de partida: si un espacio pide otro movimiento según la tabla, se ajusta mientras se cumplan las 8 reglas.
 
 ## Inicio seguro (para no gastar en reintentos)
 
@@ -59,6 +98,8 @@ Architectural visualization render, Unreal Engine cinematic style, interior real
 
 ORBIT (el arco es el dial: 45° más movimiento, 30° equilibrio, 20° si se deforman patrones repetidos):
 Architectural visualization render of a luxury interior, Unreal Engine 5 path-tracing, volumetric lighting, sharp focus, 8k. Camera motion: a robotic motion-control arm mounted on a physical circular rail bolted to the floor. The camera body physically travels sideways along the curved rail from left to right, covering a wide 45 degree arc, while the lens simultaneously yaws in the opposite direction to keep the central subject pinned dead center in frame. The radius between lens and subject stays constant for the entire shot, the camera stays at one fixed height, horizon locked dead level, all motion confined to the horizontal plane. Strong parallax: foreground objects sweep across frame faster than the back wall, revealing new sightlines and spatial depth. Continuous linear speed on rails, empty unoccupied room, solid static architecture, single room, one continuous shot.
+
+ORBIT, variante de sentido (der→izq): el mismo prompt, cambiando solo "from left to right" por "from right to left". Nada más del texto se toca.
 
 AXIS LOCK:
 Architectural visualization render, Unreal Engine 5 path-tracing, volumetric lighting, sharp focus, 8k. Camera motion: the camera is bolted to a heavy steel dolly riding a single perfectly straight rail bolted flat to the floor. The camera body physically translates forward along that rail at continuous linear speed, tracking a dead straight line into the space. The lens stays frozen pointing dead ahead for the entire shot, zero yaw, the optical axis stays perfectly parallel to the rail, the camera holds one fixed height above the floor, horizon locked dead level, every frame keeps the exact same angle as the first. Vanishing point stays pinned to the same spot in frame throughout. The scene preserves the exact geometry, materials, colors and object placement of the source image, walls and furniture keep their original shape and position, no new rooms or openings appear, no new objects are introduced. Ground-mounted machine-driven camera path, empty unoccupied space, solid static architecture, single room, one continuous shot.
